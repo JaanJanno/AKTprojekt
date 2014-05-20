@@ -1,45 +1,30 @@
 package ui;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import main.ASMController;
 import ui.panes.MenuPanel;
 import ui.panes.SimpleModePanel;
 
 public class App {
 	private JFrame frmProjekt;
-	private JPanel menuPanel;
-	private JPanel simpleModePanel;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					App window = new App();
-					window.frmProjekt.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private MenuPanel menuPanel;
+	private SimpleModePanel simpleModePanel;
+	private ASMController asmController;
 
 	/**
 	 * Create the application.
 	 */
-	public App() {
+	public App(ASMController a) {
+		this.asmController = a;
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException e) {
@@ -92,30 +77,43 @@ public class App {
 		});
 		mnNewMenu.add(mntmExit);
 
-		JMenu mnStuff = new JMenu("Stuff");
+		JMenu mnStuff = new JMenu("Actions");
 		menuBar.add(mnStuff);
 
-		JMenuItem mntmA = new JMenuItem("A");
+		JMenuItem mntmA = new JMenuItem("Reset everything");
+		mntmA.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				asmController.reset();
+				resetApp();
+			}
+		});
 		mnStuff.add(mntmA);
-
-		JMenuItem mntmB = new JMenuItem("B");
-		mnStuff.add(mntmB);
 	}
 
-	public JPanel getMenuPanel() {
+	public MenuPanel getMenuPanel() {
 		if (menuPanel == null)
-			menuPanel = new MenuPanel(this);
+			menuPanel = new MenuPanel(this, asmController);
 		return menuPanel;
 	}
 
-	public JPanel getSimpleModePanel() {
+	public SimpleModePanel getSimpleModePanel() {
 		if (simpleModePanel == null)
-			simpleModePanel = new SimpleModePanel(this);
+			simpleModePanel = new SimpleModePanel(this, asmController);
 		return simpleModePanel;
 	}
 
 	public JFrame getFrmProjekt() {
 		return frmProjekt;
+	}
+
+	public void resetApp() {
+		getSimpleModePanel().reset();
+	}
+	
+	public void update() {
+		getSimpleModePanel().updatePointers();
+		getSimpleModePanel().updateRegisters();
+		
 	}
 
 }

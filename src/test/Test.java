@@ -1,8 +1,6 @@
-package main;
+package test;
 
 import cpu.Cpu;
-import cpu.constants.OpCodes;
-import cpu.constants.ValCodes;
 import cpu.memory.MemoryStateCreator;
 
 public class Test {

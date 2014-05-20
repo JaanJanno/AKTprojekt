@@ -6,7 +6,7 @@ import cpu.constants.Byte32;
 import cpu.constants.OpCodes;
 
 public class Cpu implements Runnable{
-	
+
 	private Thread thread = new Thread(this);
 	private boolean poweredOn = true;
 	
@@ -131,6 +131,45 @@ public class Cpu implements Runnable{
 			output += Integer.toString(i) + " : " + Integer.toString(memory[i].getValue()) + '\n';
 		}
 		return output;
+	}
+	
+	public void reset() {
+		//TODO make this happen
+	}
+	public Byte32[] getMemory() {
+		return memory;
+	}
+
+	public void setMemory(Byte32[] memory) {
+		this.memory = memory;
+	}
+
+	public Integer getFrequency() {
+		return frequency;
+	}
+
+	public void setFrequency(Integer frequency) {
+		this.frequency = frequency;
+	}
+
+	public Byte32[] getRegister() {
+		return register;
+	}
+
+	public Byte32 getProgramCounter() {
+		return programCounter;
+	}
+
+	public Byte32 getStackPointer() {
+		return stackPointer;
+	}
+
+	public boolean isPoweredOn() {
+		return poweredOn;
+	}
+	
+	public void setPoweredOn(boolean poweredOn) {
+		this.poweredOn = poweredOn;
 	}
 }
 

@@ -12,19 +12,24 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import ui.App;
+
 import javax.swing.JSeparator;
+
+import main.ASMController;
 
 public class MenuPanel extends JPanel {
 
 	private static final long serialVersionUID = -7244016038731281136L;
 
 	private final App master;
+	private final ASMController asmController;
 
 	/**
 	 * Create the panel.
 	 */
-	public MenuPanel(final App master) {
+	public MenuPanel(final App master, ASMController asmController) {
 		this.master = master;
+		this.asmController = asmController;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 434, 0 };
 		gridBagLayout.rowHeights = new int[] { 16, 0, 0, 0, 0, 0, 0, 0 };
