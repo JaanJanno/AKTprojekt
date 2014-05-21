@@ -3,7 +3,7 @@ package main;
 import java.util.List;
 
 public interface ASMController {
-	public void loadFile(String absoulutePath);
+	public void loadFile(String absoulutePath, int memory);
 	
 	public void start(int frequency, int memory);
 	
@@ -18,6 +18,8 @@ public interface ASMController {
 	public List<String> getAsm();
 	
 	public List<String> getCpuMemory();
+	
+	public void nextStep();
 	
 
 }

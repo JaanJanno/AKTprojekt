@@ -34,7 +34,7 @@ public class FrequencyPanel extends JPanel {
 		add(label_8, gbc_label_8);
 
 		freqField = new IntegerField();
-		freqField.setText("1000");
+		freqField.setText(Integer.toString(DefaultValues.FREQUENCY));
 		freqField.setColumns(10);
 		GridBagConstraints gbc_textField_12 = new GridBagConstraints();
 		gbc_textField_12.insets = new Insets(0, 0, 5, 0);
@@ -50,7 +50,7 @@ public class FrequencyPanel extends JPanel {
 		add(label_9, gbc_label_9);
 
 		memField = new IntegerField();
-		memField.setText("1000");
+		memField.setText(Integer.toString(DefaultValues.MEMORY));
 		memField.setColumns(10);
 		GridBagConstraints gbc_textField_13 = new GridBagConstraints();
 		gbc_textField_13.gridx = 1;
@@ -61,6 +61,8 @@ public class FrequencyPanel extends JPanel {
 	public void reset() {
 		freqField.setText(Integer.toString(DefaultValues.FREQUENCY));
 		memField.setText(Integer.toString(DefaultValues.MEMORY));
+		freqField.setEnabled(true);
+		memField.setEnabled(true);
 	}
 
 	public JTextField getMemField() {

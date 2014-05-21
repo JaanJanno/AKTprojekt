@@ -62,7 +62,7 @@ public class App {
 	private void initialize() {
 		frmProjekt = new JFrame();
 		frmProjekt.setTitle("Projekt");
-		frmProjekt.setBounds(150, 150, 700, 450);
+		frmProjekt.setBounds(150, 150, 768, 480);
 		frmProjekt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProjekt.setContentPane(getMenuPanel());
 

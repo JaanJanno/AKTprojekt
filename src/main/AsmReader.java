@@ -11,7 +11,7 @@ public class AsmReader {
 
 	public List<String> readAsm(String path) throws IOException {
 		InputStreamReader reader = new InputStreamReader(this.getClass()
-				.getResourceAsStream("/" +path));
+				.getResourceAsStream(path));
 		BufferedReader scanner = new BufferedReader(reader);
 
 		List<String> asmList = new ArrayList<>();

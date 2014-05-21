@@ -4,8 +4,6 @@ import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;
 
-import javax.swing.JLabel;
-
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.List;
@@ -24,6 +22,7 @@ import ui.panes.elements.FrequencyPanel;
 import ui.panes.elements.PointerPanel;
 import ui.panes.elements.RegisterPanel;
 import ui.panes.elements.TopPanel;
+import ui.panes.elements.TopRightPanel;
 
 public class SimpleModePanel extends JPanel {
 
@@ -37,8 +36,7 @@ public class SimpleModePanel extends JPanel {
 	private RegisterPanel regPanel;
 	private PointerPanel pointerPanel;
 	private TopPanel topPanel;
-
-	private JLabel lblNewLabel;
+	private TopRightPanel rightPanel;
 
 	private DefaultListModel<String> asmListModel;
 	private DefaultListModel<String> memoryListModel;
@@ -85,12 +83,13 @@ public class SimpleModePanel extends JPanel {
 		gbc_panel_4.gridy = 1;
 		add(topPanel, gbc_panel_4);
 
-		lblNewLabel = new JLabel("");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 4;
-		gbc_lblNewLabel.gridy = 1;
-		add(lblNewLabel, gbc_lblNewLabel);
+		rightPanel = new TopRightPanel(master);
+		GridBagConstraints gbc_panel_5 = new GridBagConstraints();
+		gbc_panel_5.fill = GridBagConstraints.BOTH;
+		gbc_panel_5.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_5.gridx = 4;
+		gbc_panel_5.gridy = 1;
+		add(rightPanel, gbc_panel_5);
 
 		JSeparator separator_3 = new JSeparator();
 		GridBagConstraints gbc_separator_3 = new GridBagConstraints();
@@ -133,7 +132,7 @@ public class SimpleModePanel extends JPanel {
 		regPanel.reset();
 		pointerPanel.reset();
 		freqPanel.reset();
-		lblNewLabel.setText("");
+		rightPanel.reset();
 
 		asmListModel.clear();
 		memoryListModel.clear();
@@ -155,11 +154,22 @@ public class SimpleModePanel extends JPanel {
 	public void loadAssembly() {
 		int returnVal = chooser.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			asmController.loadFile(chooser.getSelectedFile().getAbsolutePath());
-			lblNewLabel.setText("File loaded");
+			int mem = freqPanel.getMemFieldText().length() != 0 ? Integer
+					.parseInt(freqPanel.getMemFieldText())
+					: DefaultValues.MEMORY;
+
+			asmController.loadFile(chooser.getSelectedFile().getAbsolutePath(),
+					mem);
+			rightPanel.setMessageLabelText("File loaded");
 			topPanel.getBtnStart().setEnabled(true);
+			freqPanel.getMemField().setEnabled(false);
+			freqPanel.getFreqField().setEnabled(false);
 		}
 
+	}
+
+	public void nextStep() {
+		asmController.nextStep();
 	}
 
 	public void updateLists() {

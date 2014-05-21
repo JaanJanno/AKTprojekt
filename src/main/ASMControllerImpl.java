@@ -16,50 +16,52 @@ public class ASMControllerImpl implements ASMController {
 	private MemoryStateCreator memState;
 
 	public ASMControllerImpl() {
-		cpu = new Cpu(30, 1);
-		pinger = new Pinger();
+		cpu = new Cpu(30,1); 
+//		pinger = new Pinger();
 		pureAsm = new ArrayList<>();
 		asmReader = new AsmReader();
 	}
 
 	@Override
-	public void loadFile(String absoulutePath) {
+	public void loadFile(String absoulutePath, int memory) {
 		try {
 			// currently test file
-			pureAsm = asmReader.readAsm("test.asm");
+			pureAsm = asmReader.readAsm("/test.asm");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		MemoryStateCreator memState = createMemState();
+		memState = createMemState(memory);
 
-		cpu.insertMemState(memState.getState());
 		Intro.window.update();
 
 	}
 
 	@Override
 	public void start(int frequency, int memory) {
+		cpu = new Cpu(memory, frequency);
 		Intro.window.update();
-		cpu.setFrequency(frequency);
-		// TODO memory size must be set
-		// cpu.setMemory(new Byte32[memory]);
+		cpu.insertMemState(memState.getState());
+
+
 		cpu.start();
-		pinger.start();
-		try {
-			cpu.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		cpu.setLive(false);
+//		pinger.start();
+//		try {
+//			cpu.join();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-
-		cpu = new Cpu(10, 10);
+		cpu = new Cpu(10, 0);
 
 		pureAsm.clear();
+		memState = new MemoryStateCreator(0);
+		cpu.insertMemState(memState.getState());
+		Intro.window.update();
 
 	}
 
@@ -84,7 +86,7 @@ public class ASMControllerImpl implements ASMController {
 	@Override
 	public void stop() {
 		try {
-			pinger.join();
+//			pinger.join();
 			cpu.join();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -101,8 +103,9 @@ public class ASMControllerImpl implements ASMController {
 	@Override
 	public List<String> getCpuMemory() {
 		String output = "";
-		Byte32[] byteList = cpu.getMemory();
 		List<String> memList = new ArrayList<>();
+		Byte32[] byteList = cpu.getMemory();
+
 		for (int i = 0; i < byteList.length; i++) {
 			// output = Integer.toString(i) + " : " +
 			// Integer.toString(byteList[i].getValue());
@@ -112,11 +115,22 @@ public class ASMControllerImpl implements ASMController {
 		}
 		return memList;
 	}
+	
+	@Override
+	public void nextStep() {
+		cpu.callStep();
+	
+		Intro.window.update();
+//		if (!cpu.isPoweredOn()) {
+//			cpu.join();
+//		}
+		
+	}
 
-	private MemoryStateCreator createMemState() {
+	private MemoryStateCreator createMemState(int memory) {
 		// TODO make pureAsm into memState. should put this method into
 		// asmReader
-		MemoryStateCreator mem = new MemoryStateCreator(30);
+		MemoryStateCreator mem = new MemoryStateCreator(memory);
 
 		mem.addAdd();
 			mem.addRegisterA();
@@ -140,7 +154,7 @@ public class ASMControllerImpl implements ASMController {
 	}
 
 	/**
-	 * Class to keep the connection open. Credit to Jaan Janno.
+	 * Based on websocet
 	 * https://github.com
 	 * /JaanJanno/OnTime/blob/master/app/controllers/chat/ChatSocket.java
 	 */
@@ -153,16 +167,18 @@ public class ASMControllerImpl implements ASMController {
 		public synchronized void run() {
 			while (cpu.isPoweredOn()) {
 				Intro.window.update();
-				System.out.println(cpu.toString());
+//				System.out.println(cpu.toString());
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			System.out.println(cpu.toString());
+//			System.out.println(cpu.toString());
 			Intro.window.update();
 		}
 	}
+
+
 
 }
