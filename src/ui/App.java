@@ -2,6 +2,8 @@ package ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -41,6 +43,17 @@ public class App {
 			e.printStackTrace();
 		}
 		initialize();
+		
+		// When in doubt, add moar threads
+		ExecutorService executorService = Executors.newFixedThreadPool(1);
+		executorService.execute(new Runnable() {
+			@Override
+			public void run() {
+				getSimpleModePanel();
+			}
+		});
+		executorService.shutdown();
+	
 	}
 
 	/**
@@ -113,6 +126,7 @@ public class App {
 	public void update() {
 		getSimpleModePanel().updatePointers();
 		getSimpleModePanel().updateRegisters();
+		getSimpleModePanel().updateLists();
 		
 	}
 

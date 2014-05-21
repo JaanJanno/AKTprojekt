@@ -1,0 +1,7 @@
+﻿ADD A, 50
+OR [2], 66
+ADD [5], 5000
+AND [5], 1023
+PUSH 5
+PUSH 5
+POP

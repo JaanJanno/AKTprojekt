@@ -15,5 +15,9 @@ public interface ASMController {
 	
 	public List<Integer> currentPointerStatus();
 	
+	public List<String> getAsm();
+	
+	public List<String> getCpuMemory();
+	
 
 }

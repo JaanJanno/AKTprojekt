@@ -1,5 +1,6 @@
 package main;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,15 +11,24 @@ import cpu.memory.MemoryStateCreator;
 public class ASMControllerImpl implements ASMController {
 	private Cpu cpu;
 	private Pinger pinger;
+	private List<String> pureAsm; // THIS IS (PROBABLY) VERY BAD
+	private AsmReader asmReader;
 
 	public ASMControllerImpl() {
 		cpu = new Cpu(30, 1);
 		pinger = new Pinger();
+		pureAsm = new ArrayList<>();
+		asmReader = new AsmReader();
 	}
 
 	@Override
 	public void loadFile(String absoulutePath) {
-		// TODO Auto-generated method stub
+		try {
+			// currently test file
+			pureAsm = asmReader.readAsm("test.asm");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		MemoryStateCreator memState = createMemState();
 
 		cpu.insertMemState(memState.getState());
@@ -30,16 +40,15 @@ public class ASMControllerImpl implements ASMController {
 	public void start(int frequency, int memory) {
 		Intro.window.update();
 		cpu.setFrequency(frequency);
-//		cpu.setMemory(new Byte32[memory]);
+		// TODO memory size must be set
+		// cpu.setMemory(new Byte32[memory]);
 		cpu.start();
 		pinger.start();
 		try {
 			cpu.join();
-		}
-		catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 
 	}
 
@@ -47,13 +56,14 @@ public class ASMControllerImpl implements ASMController {
 	public void reset() {
 		// TODO Auto-generated method stub
 		cpu.reset();
+		pureAsm.clear();
 
 	}
 
 	@Override
 	public List<Integer> currentRegisterStatus() {
 		List<Integer> in = new ArrayList<>();
-		Byte32 [] b = cpu.getRegister();
+		Byte32[] b = cpu.getRegister();
 		for (int i = 0; i < b.length; i++) {
 			in.add(b[i].getValue());
 		}
@@ -67,7 +77,7 @@ public class ASMControllerImpl implements ASMController {
 		in.add(cpu.getProgramCounter().getValue());
 		return in;
 	}
-	
+
 	@Override
 	public void stop() {
 		try {
@@ -77,12 +87,34 @@ public class ASMControllerImpl implements ASMController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	@Override
+	public List<String> getAsm() {
+		return pureAsm;
+	}
+
+	@Override
+	public List<String> getCpuMemory() {
+		String output = "";
+		Byte32[] byteList = cpu.getMemory();
+		List<String> memList = new ArrayList<>();
+		for (int i = 0; i < byteList.length; i++) {
+			// output = Integer.toString(i) + " : " +
+			// Integer.toString(byteList[i].getValue());
+			output = String.format("%-3s : %-12s", Integer.toString(i),
+					Integer.toString(byteList[i].getValue()));
+			memList.add(output);
+		}
+		return memList;
 	}
 
 	private MemoryStateCreator createMemState() {
+		// TODO make pureAsm into memState. should put this method into
+		// asmReader
 		MemoryStateCreator mem = new MemoryStateCreator(30);
-		
+
 		mem.addAdd();
 			mem.addRegisterA();
 			mem.addLiteral(50);
@@ -103,7 +135,7 @@ public class ASMControllerImpl implements ASMController {
 		mem.addShutDown();
 		return mem;
 	}
-	
+
 	/**
 	 * Class to keep the connection open. Credit to Jaan Janno.
 	 * https://github.com
@@ -129,7 +161,5 @@ public class ASMControllerImpl implements ASMController {
 			Intro.window.update();
 		}
 	}
-
-
 
 }
