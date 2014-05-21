@@ -58,7 +58,7 @@ public class Cpu implements Runnable{
 	}
 	
 	public void insertMemState(Byte32[] memory){
-		for(int i=0; i < this.memory.length; i++){
+		for(int i=0; i < this.memory.length && i < memory.length; i++){
 			this.memory[i] = new Byte32(memory[i].getValue());
 		}
 	}
