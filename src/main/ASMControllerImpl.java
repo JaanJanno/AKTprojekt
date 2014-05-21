@@ -13,6 +13,7 @@ public class ASMControllerImpl implements ASMController {
 	private Pinger pinger;
 	private List<String> pureAsm; // THIS IS (PROBABLY) VERY BAD
 	private AsmReader asmReader;
+	private MemoryStateCreator memState;
 
 	public ASMControllerImpl() {
 		cpu = new Cpu(30, 1);
@@ -55,7 +56,9 @@ public class ASMControllerImpl implements ASMController {
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
-		cpu.reset();
+
+		cpu = new Cpu(10, 10);
+
 		pureAsm.clear();
 
 	}

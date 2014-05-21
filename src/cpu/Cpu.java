@@ -157,9 +157,6 @@ public class Cpu implements Runnable{
 		return output;
 	}
 	
-	public void reset() {
-		//TODO make this happen
-	}
 	public Byte32[] getMemory() {
 		return memory;
 	}

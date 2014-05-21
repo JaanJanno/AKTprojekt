@@ -49,6 +49,7 @@ public class Test {
 		c.insertMemState(mem.getState());
 		
 		c.start();
+
 		try {
 			c.join();
 		} catch (InterruptedException e) {
