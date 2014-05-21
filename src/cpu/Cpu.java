@@ -8,6 +8,9 @@ public class Cpu implements Runnable{
 	private Thread thread = new Thread(this);
 	private boolean poweredOn = true;
 	
+	private boolean liveMode  = false;
+	private boolean steppable = false;
+	
 	private Byte32[] 	memory;
 	private Integer  	frequency;
 	
@@ -38,6 +41,16 @@ public class Cpu implements Runnable{
 		stackController = new StackController(evaluator, this.memory, stackPointer);
 		branchController = new BranchController(evaluator);
 		init();
+	}
+	
+	private boolean isSteppable(){
+		boolean wasSteppable = steppable;
+		steppable = false;
+		return wasSteppable;
+	}
+	
+	public void callStep(){
+		steppable = true;
 	}
 	
 	public void insertMemState(Byte32[] memory){
@@ -129,7 +142,8 @@ public class Cpu implements Runnable{
 		try {
 			while (poweredOn && programCounter.getValue() < memory.length){
 				Thread.sleep(1000 / frequency);
-				nextOperation();
+				if (liveMode || isSteppable())
+					nextOperation();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
