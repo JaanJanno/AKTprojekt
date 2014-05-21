@@ -44,12 +44,11 @@ public class Test {
 			mem.addRegisterX();
 			mem.addLiteral(111);
 
-		mem.addShutDown();
+		mem.addShutDown();		
 
 		c.insertMemState(mem.getState());
 		
 		c.start();
-
 		try {
 			c.join();
 		} catch (InterruptedException e) {

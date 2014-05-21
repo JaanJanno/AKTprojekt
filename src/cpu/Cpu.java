@@ -8,7 +8,7 @@ public class Cpu implements Runnable{
 	private Thread thread = new Thread(this);
 	private boolean poweredOn = true;
 	
-	private boolean liveMode  = false;
+	private boolean liveMode  = true;
 	private boolean steppable = false;
 	
 	private Byte32[] 	memory;
