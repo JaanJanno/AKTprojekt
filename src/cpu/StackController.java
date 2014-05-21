@@ -1,6 +1,5 @@
 package cpu;
 
-import java.rmi.AccessException;
 import cpu.constants.Byte32;
 
 public class StackController {
@@ -15,13 +14,12 @@ public class StackController {
 		this.stackPointer = stackPointer;
 	}
 
-	public void doPush() throws AccessException{
+	public void doPush() {
 		Byte32 pushed = evaluator.nextValue();
-		System.out.println(pushed.getValue());
 		memory[stackPointer.getPushValue()].setValue(pushed.getValue());
 	}
 	
-	public void doPop() throws AccessException{
+	public void doPop() {
 		stackPointer.getNextValue();
 	}
 }

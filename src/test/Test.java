@@ -7,9 +7,9 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Cpu c = new Cpu(30, 1000);
+		Cpu c = new Cpu(60, 1000);
 		
-		MemoryStateCreator mem = new MemoryStateCreator(30);
+		MemoryStateCreator mem = new MemoryStateCreator(60);
 		
 		mem.addAdd();
 			mem.addRegisterA();
@@ -26,10 +26,26 @@ public class Test {
 		mem.addPush();
 			mem.addLiteral(5);
 		mem.addPush();
-			mem.addPointer(5);
+			mem.addLiteral(5);
 		mem.addPop();
+		mem.addIfEq();
+			mem.addLiteral(3);
+			mem.addLiteral(5);
+		mem.addMov();
+			mem.addRegisterB();
+			mem.addLiteral(111);
+		mem.addMov();
+			mem.addRegisterC();
+			mem.addLiteral(222);
+		mem.addIfNe();
+			mem.addLiteral(3);
+			mem.addLiteral(5);
+		mem.addMov();
+			mem.addRegisterX();
+			mem.addLiteral(111);
+
 		mem.addShutDown();
-		
+
 		c.insertMemState(mem.getState());
 		
 		c.start();

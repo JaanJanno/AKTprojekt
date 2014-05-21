@@ -1,7 +1,5 @@
 package cpu;
 
-import java.rmi.AccessException;
-
 import cpu.constants.Byte32;
 import cpu.constants.ValCodes;
 
@@ -31,15 +29,13 @@ public class Evaluator {
 		return memory[programCounter.getNextValue()].getValue();
 	}
 	
-	public Byte32 getMemReference(int index) throws AccessException{
-		if(index < memory.length){
+	public Byte32 getMemReference(int index) {
+		if(index < memory.length)
 			return memory[index];
-		} else{
-			throw new AccessException(null);
-		}
+		throw new RuntimeException();
 	}
 	
-	public Byte32 nextValue() throws AccessException{
+	public Byte32 nextValue() {
 		
 		switch (getNextValueCode()) {
 		

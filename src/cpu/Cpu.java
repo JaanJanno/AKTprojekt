@@ -1,7 +1,5 @@
 package cpu;
 
-import java.rmi.AccessException;
-
 import cpu.constants.Byte32;
 import cpu.constants.OpCodes;
 
@@ -19,6 +17,7 @@ public class Cpu implements Runnable{
 	
 	private Evaluator		evaluator;
 	private StackController stackController;
+	private BranchController branchController;
 	
 	private void init(){
 		for(int i = 0; i < memory.length; i++){
@@ -37,6 +36,7 @@ public class Cpu implements Runnable{
 		stackPointer   	= new Byte32(this.memory.length-1);
 		evaluator		= new Evaluator(this.memory, register, programCounter, stackPointer);
 		stackController = new StackController(evaluator, this.memory, stackPointer);
+		branchController = new BranchController(evaluator);
 		init();
 	}
 	
@@ -46,9 +46,15 @@ public class Cpu implements Runnable{
 		}
 	}
 
-	private void nextOperation() throws AccessException{
+	private void nextOperation() {
 
 		switch (evaluator.getNextOperationCode()) {
+		
+		case OpCodes.MOV:
+			Byte32 first	= evaluator.nextValue();
+			Byte32 second 	= evaluator.nextValue();
+			first.setValue(second.getValue());
+			break;
 		
 			// Arithmetic operators.
 		
@@ -95,6 +101,24 @@ public class Cpu implements Runnable{
 			poweredOn = false;
 			break;
 			
+		case OpCodes.IFE:
+			branchController.doIfe();
+			break;
+		case OpCodes.IFN:
+			branchController.doIfn();
+			break;
+		case OpCodes.IFG:
+			branchController.doIfg();
+			break;
+		case OpCodes.IFL:
+			branchController.doIfl();
+			break;
+		case OpCodes.IFGE:
+			branchController.doIfge();
+			break;
+		case OpCodes.IFLE:
+			branchController.doIfle();
+			break;
 		default:
 			break;
 		}

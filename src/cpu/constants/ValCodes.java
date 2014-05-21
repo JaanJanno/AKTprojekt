@@ -28,6 +28,7 @@ public class ValCodes {
 	
 	public static final int SP  	= 20;
 	public static final int PC  	= 21;
+	
 	public static final int POINTER = 22;
 	public static final int LITERAL = 23;
 

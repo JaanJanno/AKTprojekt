@@ -25,5 +25,14 @@ public class OpCodes {
 	// Control
 	
 	public static final int EXPLODE = 666;
+	
+	// Branch
+	
+	public static final int IFE	 	= 11;
+	public static final int IFN	 	= 12;
+	public static final int IFG 	= 13;
+	public static final int IFL 	= 14;
+	public static final int IFGE 	= 15;
+	public static final int IFLE 	= 16;
 
 }
