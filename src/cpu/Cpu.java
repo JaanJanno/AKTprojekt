@@ -53,8 +53,8 @@ public class Cpu implements Runnable{
 		steppable = true;
 	}
 	
-	public void callLive(){
-		liveMode = true;
+	public void setLive(boolean mode){
+		liveMode = mode;
 	}
 	
 	public void insertMemState(Byte32[] memory){
