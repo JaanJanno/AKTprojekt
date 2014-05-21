@@ -53,6 +53,10 @@ public class Cpu implements Runnable{
 		steppable = true;
 	}
 	
+	public void callLive(){
+		liveMode = true;
+	}
+	
 	public void insertMemState(Byte32[] memory){
 		for(int i=0; i < this.memory.length; i++){
 			this.memory[i] = new Byte32(memory[i].getValue());
