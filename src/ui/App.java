@@ -13,13 +13,16 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import main.ASMController;
+import ui.panes.HelpPanel;
 import ui.panes.MenuPanel;
 import ui.panes.SimpleModePanel;
+import javax.swing.JSeparator;
 
 public class App {
 	private JFrame frmProjekt;
 	private MenuPanel menuPanel;
 	private SimpleModePanel simpleModePanel;
+	private HelpPanel helpPanel;
 	private ASMController asmController;
 
 	/**
@@ -45,11 +48,17 @@ public class App {
 		initialize();
 		
 		// When in doubt, add moar threads
-		ExecutorService executorService = Executors.newFixedThreadPool(1);
+		ExecutorService executorService = Executors.newFixedThreadPool(2);
 		executorService.execute(new Runnable() {
 			@Override
 			public void run() {
 				getSimpleModePanel();
+			}
+		});
+		executorService.execute(new Runnable() {
+			@Override
+			public void run() {
+				getHelpPanel();
 			}
 		});
 		executorService.shutdown();
@@ -88,6 +97,12 @@ public class App {
 				System.exit(1);
 			}
 		});
+		
+		JMenuItem mntmLoadAsmFile = new JMenuItem("Load ASM file");
+		mnNewMenu.add(mntmLoadAsmFile);
+		
+		JSeparator separator = new JSeparator();
+		mnNewMenu.add(separator);
 		mnNewMenu.add(mntmExit);
 
 		JMenu mnStuff = new JMenu("Actions");
@@ -101,6 +116,18 @@ public class App {
 			}
 		});
 		mnStuff.add(mntmA);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmHelp = new JMenuItem("Help");
+		mntmHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmProjekt.setContentPane(getHelpPanel());
+				frmProjekt.revalidate();
+			}
+		});
+		mnHelp.add(mntmHelp);
 	}
 
 	public MenuPanel getMenuPanel() {
@@ -113,6 +140,12 @@ public class App {
 		if (simpleModePanel == null)
 			simpleModePanel = new SimpleModePanel(this, asmController);
 		return simpleModePanel;
+	}
+	
+	public HelpPanel getHelpPanel() {
+		if (helpPanel == null)
+			helpPanel = new HelpPanel();
+		return helpPanel;
 	}
 
 	public JFrame getFrmProjekt() {
