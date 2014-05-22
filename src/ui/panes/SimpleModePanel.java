@@ -3,13 +3,11 @@ package ui.panes;
 import javax.swing.JPanel;
 
 import java.awt.GridBagLayout;
-
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JSeparator;
 import javax.swing.JScrollPane;
@@ -19,6 +17,7 @@ import main.ASMController;
 import ui.App;
 import ui.constants.DefaultValues;
 import ui.panes.elements.FrequencyPanel;
+import ui.panes.elements.LeftScrollPanel;
 import ui.panes.elements.PointerPanel;
 import ui.panes.elements.RegisterPanel;
 import ui.panes.elements.TopPanel;
@@ -31,14 +30,13 @@ public class SimpleModePanel extends JPanel {
 	private final App master;
 	private final ASMController asmController;
 
-
 	private FrequencyPanel freqPanel;
 	private RegisterPanel regPanel;
 	private PointerPanel pointerPanel;
 	private TopPanel topPanel;
 	private TopRightPanel rightPanel;
+	private LeftScrollPanel leftScrollPanel;
 
-	private DefaultListModel<String> asmListModel;
 	private DefaultListModel<String> memoryListModel;
 
 	/**
@@ -48,20 +46,18 @@ public class SimpleModePanel extends JPanel {
 		this.master = master;
 		this.asmController = asmController;
 
-
-
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 220, 0, 250, 250, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 1.0,
-				0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 0.0,
+		gridBagLayout.columnWidths = new int[] { 0, 220, 0, 250, 0, 250, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0,
+				1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 1.0, 1.0, 0.0,
 				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JSeparator separator = new JSeparator();
 		GridBagConstraints gbc_separator = new GridBagConstraints();
-		gbc_separator.gridwidth = 6;
+		gbc_separator.gridwidth = 7;
 		gbc_separator.insets = new Insets(0, 0, 5, 0);
 		gbc_separator.gridx = 0;
 		gbc_separator.gridy = 0;
@@ -69,7 +65,7 @@ public class SimpleModePanel extends JPanel {
 
 		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
 		gbc_panel_3.fill = GridBagConstraints.BOTH;
-		gbc_panel_3.gridheight = 2;
+		gbc_panel_3.gridheight = 3;
 		gbc_panel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_3.gridx = 1;
 		gbc_panel_3.gridy = 1;
@@ -87,7 +83,7 @@ public class SimpleModePanel extends JPanel {
 		GridBagConstraints gbc_panel_5 = new GridBagConstraints();
 		gbc_panel_5.fill = GridBagConstraints.BOTH;
 		gbc_panel_5.insets = new Insets(0, 0, 5, 5);
-		gbc_panel_5.gridx = 4;
+		gbc_panel_5.gridx = 5;
 		gbc_panel_5.gridy = 1;
 		add(rightPanel, gbc_panel_5);
 
@@ -98,22 +94,30 @@ public class SimpleModePanel extends JPanel {
 		gbc_separator_3.gridy = 2;
 		add(separator_3, gbc_separator_3);
 
-		asmListModel = new DefaultListModel<>();
-		JScrollPane scrollPane = new JScrollPane(createScrollList(asmListModel));
+		leftScrollPanel = new LeftScrollPanel(asmController);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridheight = 2;
 		gbc_scrollPane.gridx = 3;
 		gbc_scrollPane.gridy = 2;
-		add(scrollPane, gbc_scrollPane);
+		add(leftScrollPanel, gbc_scrollPane);
 
 		memoryListModel = new DefaultListModel<>();
+
+		JSeparator separator_1 = new JSeparator();
+		GridBagConstraints gbc_separator_1 = new GridBagConstraints();
+		gbc_separator_1.insets = new Insets(0, 0, 5, 5);
+		gbc_separator_1.gridx = 4;
+		gbc_separator_1.gridy = 2;
+		add(separator_1, gbc_separator_1);
 		JScrollPane scrollPane_1 = new JScrollPane(
 				createScrollList(memoryListModel));
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.gridheight = 2;
 		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 4;
+		gbc_scrollPane_1.gridx = 5;
 		gbc_scrollPane_1.gridy = 2;
 		add(scrollPane_1, gbc_scrollPane_1);
 
@@ -133,23 +137,26 @@ public class SimpleModePanel extends JPanel {
 		pointerPanel.reset();
 		freqPanel.reset();
 		rightPanel.reset();
+		leftScrollPanel.reset();
 
-		asmListModel.clear();
 		memoryListModel.clear();
 
 		topPanel.getBtnStart().setEnabled(false);
+		topPanel.getBtnRunToEnd().setEnabled(false);
 	}
 
-	public void startStop() {
-		int freq = freqPanel.getFreqFieldText().length() != 0 ? Integer
-				.parseInt(freqPanel.getFreqFieldText())
-				: DefaultValues.FREQUENCY;
-		int mem = freqPanel.getMemFieldText().length() != 0 ? Integer
-				.parseInt(freqPanel.getMemFieldText()) : DefaultValues.MEMORY;
-		asmController.start(freq, mem);
-		freqPanel.setMemFieldText(Integer.toString(mem));
-		freqPanel.setFreqFieldText(Integer.toString(freq));
+	public void start() {
+		asmController.start();
+
 		topPanel.getBtnStart().setEnabled(false);
+		topPanel.getBtnRunToEnd().setEnabled(true);
+		rightPanel.getBtnNextStep().setEnabled(true);
+	}
+
+	public void runToEnd() {
+		asmController.runToEnd();
+		topPanel.getBtnStart().setEnabled(false);
+		rightPanel.getBtnNextStep().setEnabled(false);
 	}
 
 	public void assemblyLoaded() {
@@ -157,20 +164,27 @@ public class SimpleModePanel extends JPanel {
 		topPanel.getBtnStart().setEnabled(true);
 		freqPanel.getMemField().setEnabled(false);
 		freqPanel.getFreqField().setEnabled(false);
-		rightPanel.getBtnNextStep().setEnabled(true);
+
+		int freq = freqPanel.getFreqFieldText().length() != 0 ? Integer
+				.parseInt(freqPanel.getFreqFieldText())
+				: DefaultValues.FREQUENCY;
+		int mem = freqPanel.getMemFieldText().length() != 0 ? Integer
+				.parseInt(freqPanel.getMemFieldText()) : DefaultValues.MEMORY;
+
+		freqPanel.setMemFieldText(Integer.toString(mem));
+		freqPanel.setFreqFieldText(Integer.toString(freq));
+
 	}
 
 	public void nextStep() {
 		asmController.nextStep();
+
 	}
 
 	public void updateLists() {
-		asmListModel.clear();
+		leftScrollPanel.updateLists();
+
 		memoryListModel.clear();
-		List<String> asmList = asmController.getAsm();
-		for (int i = 0; i < asmList.size(); i++) {
-			asmListModel.addElement(asmList.get(i));
-		}
 		List<String> memList = asmController.getCpuMemory();
 		for (int i = 0; i < memList.size(); i++) {
 			memoryListModel.addElement(memList.get(i));

@@ -4,23 +4,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ui.constants.DefaultValues;
 import cpu.Cpu;
 import cpu.constants.Byte32;
 import cpu.memory.MemoryStateCreator;
 
 public class ASMControllerImpl implements ASMController {
 	private Cpu cpu;
-	private Pinger pinger;
 	private List<String> pureAsm; // THIS IS (PROBABLY) VERY BAD
 	private AsmReader asmReader;
 	private MemoryStateCreator memState;
+	private List<String> processedCommands; 
 
 	public ASMControllerImpl() {
-//		cpu = new Cpu(DefaultValues.MEMORY,1); 
-//		pinger = new Pinger();
 		pureAsm = new ArrayList<>();
 		asmReader = new AsmReader();
+		processedCommands = new ArrayList<>();
 	}
 
 	@Override
@@ -39,21 +37,20 @@ public class ASMControllerImpl implements ASMController {
 	}
 
 	@Override
-	public void start(int frequency, int memory) {
-
+	public void start() {
 		Intro.window.update();
-
-
-
-		cpu.start();
 		cpu.setLive(false);
-//		pinger.start();
-//		try {
-//			cpu.join();
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-
+		cpu.start();
+	}
+	
+	@Override
+	public void runToEnd() {
+		while(cpu.isPoweredOn()) {
+			cpu.callStep();		
+			processedCommands.add(cpu.getCurrentOpString());
+			Intro.window.update();
+		}
+		
 	}
 
 	@Override
@@ -63,6 +60,7 @@ public class ASMControllerImpl implements ASMController {
 		pureAsm.clear();
 		memState = new MemoryStateCreator(memory);
 		cpu.insertMemState(memState.getState());
+		processedCommands.clear();
 //		Intro.window.update();
 
 	}
@@ -88,10 +86,8 @@ public class ASMControllerImpl implements ASMController {
 	@Override
 	public void stop() {
 		try {
-//			pinger.join();
 			cpu.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -127,12 +123,15 @@ public class ASMControllerImpl implements ASMController {
 	@Override
 	public void nextStep() {
 		cpu.callStep();
-	
+		if(cpu.isPoweredOn())
+			processedCommands.add(cpu.getCurrentOpString());
 		Intro.window.update();
-//		if (!cpu.isPoweredOn()) {
-//			cpu.join();
-//		}
-		
+	}
+	
+	@Override
+	public List<String> getProcessedCommands() {
+
+		return processedCommands;
 	}
 
 	private MemoryStateCreator createMemState(int memory) {
@@ -175,33 +174,5 @@ public class ASMControllerImpl implements ASMController {
 		mem.addShutDown();
 		return mem;
 	}
-
-	/**
-	 * Based on websocet
-	 * https://github.com
-	 * /JaanJanno/OnTime/blob/master/app/controllers/chat/ChatSocket.java
-	 */
-	private class Pinger extends Thread {
-
-		public Pinger() {
-		}
-
-		@Override
-		public synchronized void run() {
-			while (cpu.isPoweredOn()) {
-				Intro.window.update();
-//				System.out.println(cpu.toString());
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-//			System.out.println(cpu.toString());
-			Intro.window.update();
-		}
-	}
-
-
 
 }

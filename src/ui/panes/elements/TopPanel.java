@@ -16,6 +16,7 @@ public class TopPanel extends JPanel {
 
 	private static final long serialVersionUID = -1380137801426399721L;
 	private JButton btnStart;
+	private JButton btnRunToEnd;
 	private final App master;
 
 	public TopPanel(final App master) {
@@ -33,7 +34,7 @@ public class TopPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				master.getSimpleModePanel().startStop();
+				master.getSimpleModePanel().start();
 
 			}
 		});
@@ -43,20 +44,21 @@ public class TopPanel extends JPanel {
 		gbc_btnStart.gridy = 0;
 		add(btnStart, gbc_btnStart);
 
-//		JButton btnLoadAssembly = new JButton("Load Assembly");
-//		btnLoadAssembly.addActionListener(new ActionListener() {
-//
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				master.loadAssembly();
-//
-//			}
-//		});
-//		GridBagConstraints gbc_btnLoadAssembly = new GridBagConstraints();
-//		gbc_btnLoadAssembly.insets = new Insets(0, 0, 5, 0);
-//		gbc_btnLoadAssembly.gridx = 1;
-//		gbc_btnLoadAssembly.gridy = 0;
-//		add(btnLoadAssembly, gbc_btnLoadAssembly);
+		btnRunToEnd = new JButton("Run to end");
+		btnRunToEnd.setEnabled(false);
+		btnRunToEnd.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				master.getSimpleModePanel().runToEnd();
+
+			}
+		});
+		GridBagConstraints gbc_btnRunToEnd = new GridBagConstraints();
+		gbc_btnRunToEnd.insets = new Insets(0, 0, 5, 0);
+		gbc_btnRunToEnd.gridx = 1;
+		gbc_btnRunToEnd.gridy = 0;
+		add(btnRunToEnd, gbc_btnRunToEnd);
 
 		JSeparator separator_2 = new JSeparator();
 		GridBagConstraints gbc_separator_2 = new GridBagConstraints();
@@ -68,6 +70,10 @@ public class TopPanel extends JPanel {
 
 	public JButton getBtnStart() {
 		return btnStart;
+	}
+
+	public JButton getBtnRunToEnd() {
+		return btnRunToEnd;
 	}
 
 }
