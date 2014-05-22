@@ -151,7 +151,7 @@ public class BranchController {
 			
 		// Control
 			
-		case OpCodes.EXPLODE:
+		case OpCodes.SD:
 			return 0;	
 
 		default:

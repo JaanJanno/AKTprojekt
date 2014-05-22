@@ -26,11 +26,11 @@ public class OpCodes {
 	// Bitshifts
 	
 	public static final int SHL 	= 19;
-	public static final int SHR 	= 7;
+	public static final int SHR 	= 20;
 	
 	// Control
 	
-	public static final int EXPLODE = 666;
+	public static final int SD		= 7;
 	
 	// Branch
 	
@@ -76,7 +76,7 @@ public class OpCodes {
 		case SHR:			
 			return "SHR ?1, ?2";
 			
-		case EXPLODE:			
+		case SD:			
 			return "SD";
 			
 		case IFE:			

@@ -130,7 +130,7 @@ public class Cpu implements Runnable{
 			
 			// Control flow.
 			
-		case OpCodes.EXPLODE:			
+		case OpCodes.SD:			
 			poweredOn = false;
 			break;
 			

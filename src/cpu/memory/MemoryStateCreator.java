@@ -328,6 +328,6 @@ public class MemoryStateCreator {
 		
 		// SD
 		
-		add(OpCodes.EXPLODE);
+		add(OpCodes.SD);
 	}
 }
