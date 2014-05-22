@@ -94,6 +94,7 @@ public class OpCodes {
 			
 			
 		default:
+			System.out.println(i);
 			return "INVALID OP";
 		}
 	}

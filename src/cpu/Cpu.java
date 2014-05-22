@@ -67,6 +67,8 @@ public class Cpu implements Runnable{
 
 	private void nextOperation() {
 		
+		System.out.println(evaluator.toString());
+		
 		lastCommand = evaluator.toString();
 
 		switch (evaluator.getNextOperationCode()) {

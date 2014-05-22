@@ -64,7 +64,7 @@ public class BranchController {
 	private void skipValue() {
 		int valCode = evaluator.getNextValueCode();
 		if (isTwoByteVal(valCode)){
-			evaluator.nextValue();
+			evaluator.getNextValueCode();
 		}	
 	}
 

@@ -11,42 +11,28 @@ public class Test {
 		
 		MemoryStateCreator mem = new MemoryStateCreator(60);
 		
-		mem.addAdd();
+		mem.addMov();
 			mem.addRegisterA();
-			mem.addLiteral(50);
-		mem.addOr();
-			mem.addPointer(2);
-			mem.addLiteral(66);
-		mem.addAdd();
-			mem.addPointer(5);
-			mem.addLiteral(5000);
-		mem.addAnd();
-			mem.addPointer(5);
-			mem.addLiteral(1023);
-		mem.addPush();
-			mem.addLiteral(5);
-		mem.addPush();
-			mem.addLiteral(5);
-		mem.addPop();
+			mem.addLiteral(10);
+			
 		mem.addIfEq();
-			mem.addLiteral(3);
-			mem.addLiteral(5);
+			mem.addRegisterA();
+			mem.addLiteral(0);
+			
 		mem.addMov();
-			mem.addRegisterB();
-			mem.addLiteral(111);
-		mem.addMov();
-			mem.addRegisterC();
-			mem.addLiteral(222);
-		mem.addIfNe();
-			mem.addLiteral(3);
-			mem.addLiteral(5);
-		mem.addMov();
-			mem.addRegisterX();
-			mem.addLiteral(111);
-		mem.addShr();
-			mem.addPointer(0);
+			mem.addPc();
+			mem.addLiteral(23);
+			
+		mem.addPush();
 			mem.addLiteral(5);
 			
+		mem.addSub();
+			mem.addRegisterA();
+			mem.addLiteral(1);
+		
+		mem.addMov();
+			mem.addPc();
+			mem.addLiteral(4);
 
 		mem.addShutDown();		
 
