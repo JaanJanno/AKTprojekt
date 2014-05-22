@@ -26,6 +26,7 @@ public class App {
 	private MenuPanel menuPanel;
 	private SimpleModePanel simpleModePanel;
 	private HelpPanel helpPanel;
+	private HelpPanel instructionPanel;
 	private ASMController asmController;
 	private JFileChooser chooser;
 
@@ -65,6 +66,12 @@ public class App {
 				getHelpPanel();
 			}
 		});
+		executorService.execute(new Runnable() {
+			@Override
+			public void run() {
+				getInstructionPanel();
+			}
+		});
 		executorService.shutdown();
 
 	}
@@ -89,8 +96,7 @@ public class App {
 		mntmBackToMenu.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frmProjekt.setContentPane(getMenuPanel());
-				frmProjekt.revalidate();
+				goToMenu();
 			}
 		});
 		mnNewMenu.add(mntmBackToMenu);
@@ -129,6 +135,17 @@ public class App {
 				resetApp();
 			}
 		});
+
+		JMenuItem mntmCpuView = new JMenuItem("CPU view");
+		mntmCpuView.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				goToSimpleMode();
+			}
+		});
+		mnStuff.add(mntmCpuView);
+
+		JSeparator separator_1 = new JSeparator();
+		mnStuff.add(separator_1);
 		mnStuff.add(mntmA);
 
 		JMenu mnHelp = new JMenu("Help");
@@ -141,6 +158,14 @@ public class App {
 				frmProjekt.revalidate();
 			}
 		});
+
+		JMenuItem mntmInstructions = new JMenuItem("Instructions");
+		mntmInstructions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				goToInstructions();
+			}
+		});
+		mnHelp.add(mntmInstructions);
 		mnHelp.add(mntmHelp);
 
 		chooser = new JFileChooser();
@@ -148,7 +173,7 @@ public class App {
 
 	public MenuPanel getMenuPanel() {
 		if (menuPanel == null)
-			menuPanel = new MenuPanel(this, asmController);
+			menuPanel = new MenuPanel(this);
 		return menuPanel;
 	}
 
@@ -160,8 +185,14 @@ public class App {
 
 	public HelpPanel getHelpPanel() {
 		if (helpPanel == null)
-			helpPanel = new HelpPanel();
+			helpPanel = new HelpPanel("help.html");
 		return helpPanel;
+	}
+
+	public HelpPanel getInstructionPanel() {
+		if (instructionPanel == null)
+			instructionPanel = new HelpPanel("instruction.html");
+		return instructionPanel;
 	}
 
 	public JFrame getFrmProjekt() {
@@ -185,15 +216,36 @@ public class App {
 			int mem = getSimpleModePanel().getFreqPanel().getMemFieldText()
 					.length() != 0 ? Integer.parseInt(getSimpleModePanel()
 					.getFreqPanel().getMemFieldText()) : DefaultValues.MEMORY;
-					int freq = getSimpleModePanel().getFreqPanel().getFreqFieldText().length() != 0 ? Integer
-							.parseInt(getSimpleModePanel().getFreqPanel().getFreqFieldText())
-							: DefaultValues.FREQUENCY;
+			int freq = getSimpleModePanel().getFreqPanel().getFreqFieldText()
+					.length() != 0 ? Integer.parseInt(getSimpleModePanel()
+					.getFreqPanel().getFreqFieldText())
+					: DefaultValues.FREQUENCY;
 			asmController.loadFile(chooser.getSelectedFile().getAbsolutePath(),
 					mem, freq);
 			getSimpleModePanel().assemblyLoaded();
 
 		}
 
+	}
+
+	public void goToInstructions() {
+		frmProjekt.setContentPane(getInstructionPanel());
+		frmProjekt.revalidate();
+	}
+
+	public void goToSimpleMode() {
+		frmProjekt.setContentPane(getSimpleModePanel());
+		frmProjekt.revalidate();
+	}
+
+	public void goToHelp() {
+		frmProjekt.setContentPane(getHelpPanel());
+		frmProjekt.revalidate();
+	}
+
+	public void goToMenu() {
+		frmProjekt.setContentPane(getMenuPanel());
+		frmProjekt.revalidate();
 	}
 
 }

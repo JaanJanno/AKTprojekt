@@ -17,10 +17,8 @@ public class TopPanel extends JPanel {
 	private static final long serialVersionUID = -1380137801426399721L;
 	private JButton btnStart;
 	private JButton btnRunToEnd;
-	private final App master;
 
 	public TopPanel(final App master) {
-		this.master = master;
 		GridBagLayout gbl_panel_4 = new GridBagLayout();
 		gbl_panel_4.columnWidths = new int[] { 0, 0, 0 };
 		gbl_panel_4.rowHeights = new int[] { 0, 0, 0 };

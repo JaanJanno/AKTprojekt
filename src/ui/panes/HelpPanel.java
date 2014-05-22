@@ -16,11 +16,11 @@ public class HelpPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public HelpPanel() {
+	public HelpPanel(String path) {
 		// Load help
-		String text = "nothing here. could not find help.html";
+		String text = "nothing here. could not find " + path;
 		try {
-			text = TextReader.helpTextLoader("help.html");
+			text = TextReader.helpTextLoader(path);
 		} catch (IOException e) {
 		}
 
