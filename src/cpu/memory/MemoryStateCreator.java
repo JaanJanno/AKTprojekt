@@ -30,6 +30,22 @@ public class MemoryStateCreator {
 		return memory;
 	}
 	
+	public void addSp(){
+		
+		// SP
+		
+		add(ValCodes.SP);
+		
+	}
+	
+	public void addPc(){
+		
+		// PC
+		
+		add(ValCodes.PC);
+		
+	}
+	
 	public void addRegisterA_pointerPlusLiteral(int literal){
 		
 		// [A + a]
