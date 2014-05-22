@@ -80,8 +80,9 @@ public class FrequencyPanel extends JPanel {
 		memField.setText(text);
 	}
 
-	public String getMemFieldText() {
-		return memField.getText();
+	public int getMemFieldInteger() {
+		return memField.getText().length() != 0 ? Integer.parseInt(memField
+				.getText()) : DefaultValues.MEMORY;
 	}
 
 	public JTextField getFreqField() {
@@ -96,8 +97,9 @@ public class FrequencyPanel extends JPanel {
 		freqField.setText(text);
 	}
 
-	public String getFreqFieldText() {
-		return freqField.getText();
+	public int getFreqFieldInteger() {
+		return freqField.getText().length() != 0 ? Integer.parseInt(freqField
+				.getText()) : DefaultValues.FREQUENCY;
 	}
 
 }

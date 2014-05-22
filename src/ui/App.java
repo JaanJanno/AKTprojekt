@@ -14,7 +14,6 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import main.ASMController;
-import ui.constants.DefaultValues;
 import ui.panes.HelpPanel;
 import ui.panes.MenuPanel;
 import ui.panes.SimpleModePanel;
@@ -53,7 +52,7 @@ public class App {
 		initialize();
 
 		// When in doubt, add moar threads
-		ExecutorService executorService = Executors.newFixedThreadPool(2);
+		ExecutorService executorService = Executors.newFixedThreadPool(3);
 		executorService.execute(new Runnable() {
 			@Override
 			public void run() {
@@ -115,6 +114,14 @@ public class App {
 			}
 		});
 		mnNewMenu.add(mntmLoadAsmFile);
+		
+		JMenuItem mntmLoadTestFile = new JMenuItem("Load test file");
+		mntmLoadTestFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadTest();
+			}
+		});
+		mnNewMenu.add(mntmLoadTestFile);
 
 		JSeparator separator = new JSeparator();
 		mnNewMenu.add(separator);
@@ -126,11 +133,7 @@ public class App {
 		JMenuItem mntmA = new JMenuItem("Reset everything");
 		mntmA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int mem = getSimpleModePanel().getFreqPanel().getMemFieldText()
-						.length() != 0 ? Integer.parseInt(getSimpleModePanel()
-						.getFreqPanel().getMemFieldText())
-						: DefaultValues.MEMORY;
-
+				int mem = getSimpleModePanel().getFreqPanel().getMemFieldInteger();
 				asmController.reset(mem);
 				resetApp();
 			}
@@ -154,8 +157,7 @@ public class App {
 		JMenuItem mntmHelp = new JMenuItem("Help");
 		mntmHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				frmProjekt.setContentPane(getHelpPanel());
-				frmProjekt.revalidate();
+				goToHelp();
 			}
 		});
 
@@ -213,19 +215,22 @@ public class App {
 	public void loadAssembly() {
 		int returnVal = chooser.showOpenDialog(null);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			int mem = getSimpleModePanel().getFreqPanel().getMemFieldText()
-					.length() != 0 ? Integer.parseInt(getSimpleModePanel()
-					.getFreqPanel().getMemFieldText()) : DefaultValues.MEMORY;
-			int freq = getSimpleModePanel().getFreqPanel().getFreqFieldText()
-					.length() != 0 ? Integer.parseInt(getSimpleModePanel()
-					.getFreqPanel().getFreqFieldText())
-					: DefaultValues.FREQUENCY;
+			int mem = getSimpleModePanel().getFreqPanel().getMemFieldInteger();
+			int freq = getSimpleModePanel().getFreqPanel().getFreqFieldInteger();
 			asmController.loadFile(chooser.getSelectedFile().getAbsolutePath(),
 					mem, freq);
 			getSimpleModePanel().assemblyLoaded();
 
 		}
 
+	}
+	
+	private void loadTest() {
+		int mem = getSimpleModePanel().getFreqPanel().getMemFieldInteger();
+		int freq = getSimpleModePanel().getFreqPanel().getFreqFieldInteger();
+		asmController.loadFile("/test.asm",
+				mem, freq);
+		getSimpleModePanel().assemblyLoaded();		
 	}
 
 	public void goToInstructions() {

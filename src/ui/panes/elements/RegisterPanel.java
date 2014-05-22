@@ -43,7 +43,7 @@ public class RegisterPanel extends JPanel {
 		gbc_lblRegistors.gridy = 0;
 		add(lblRegistors, gbc_lblRegistors);
 
-		JLabel lblRegister = new JLabel("Register 1");
+		JLabel lblRegister = new JLabel("Register A");
 		GridBagConstraints gbc_lblRegister = new GridBagConstraints();
 		gbc_lblRegister.insets = new Insets(0, 0, 5, 5);
 		gbc_lblRegister.gridx = 0;
@@ -60,7 +60,7 @@ public class RegisterPanel extends JPanel {
 		register1.setEnabled(false);
 		register1.setColumns(10);
 
-		JLabel lblRegister_1 = new JLabel("Register 2");
+		JLabel lblRegister_1 = new JLabel("Register B");
 		GridBagConstraints gbc_lblRegister_1 = new GridBagConstraints();
 		gbc_lblRegister_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblRegister_1.gridx = 0;
@@ -78,7 +78,7 @@ public class RegisterPanel extends JPanel {
 		register2.setEditable(false);
 		register2.setColumns(10);
 
-		JLabel lblRegister_2 = new JLabel("Register 3");
+		JLabel lblRegister_2 = new JLabel("Register C");
 		GridBagConstraints gbc_lblRegister_2 = new GridBagConstraints();
 		gbc_lblRegister_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblRegister_2.gridx = 0;
@@ -96,7 +96,7 @@ public class RegisterPanel extends JPanel {
 		register3.setEditable(false);
 		register3.setColumns(10);
 
-		JLabel lblRegister_3 = new JLabel("Register 4");
+		JLabel lblRegister_3 = new JLabel("Register X");
 		GridBagConstraints gbc_lblRegister_3 = new GridBagConstraints();
 		gbc_lblRegister_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblRegister_3.gridx = 0;
@@ -114,7 +114,7 @@ public class RegisterPanel extends JPanel {
 		register4.setEditable(false);
 		register4.setColumns(10);
 
-		JLabel lblRegister_4 = new JLabel("Register 5");
+		JLabel lblRegister_4 = new JLabel("Register Y");
 		GridBagConstraints gbc_lblRegister_4 = new GridBagConstraints();
 		gbc_lblRegister_4.insets = new Insets(0, 0, 5, 5);
 		gbc_lblRegister_4.gridx = 0;
@@ -132,7 +132,7 @@ public class RegisterPanel extends JPanel {
 		register5.setEditable(false);
 		register5.setColumns(10);
 
-		JLabel lblRegister_5 = new JLabel("Register 6");
+		JLabel lblRegister_5 = new JLabel("Register Z");
 		GridBagConstraints gbc_lblRegister_5 = new GridBagConstraints();
 		gbc_lblRegister_5.insets = new Insets(0, 0, 0, 5);
 		gbc_lblRegister_5.gridx = 0;
