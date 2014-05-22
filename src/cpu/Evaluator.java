@@ -1,6 +1,7 @@
 package cpu;
 
 import cpu.constants.Byte32;
+import cpu.constants.OpCodes;
 import cpu.constants.ValCodes;
 
 public class Evaluator {
@@ -27,6 +28,10 @@ public class Evaluator {
 	
 	public int getNextValueCode(){
 		return memory[programCounter.getNextValue()].getValue();
+	}
+	
+	public Byte32 getCurrentOpByte(){
+		return memory[programCounter.getValue()];
 	}
 	
 	public Byte32 getMemReference(int index) {
@@ -107,6 +112,36 @@ public class Evaluator {
 		default:
 			return null;
 		}
+	}
+	
+	private int getValueAt(int i) {
+		return memory[programCounter.getValue()+i].getValue();
+	}
+	
+	@Override
+	public String toString() {
+		String opString = OpCodes.getOperation(this.getCurrentOpByte().getValue());
+
+		if (ValCodes.isOneByteValue(getValueAt(1))){
+			opString = opString.replaceAll("\\?1", ValCodes.getValString(getValueAt(1)));
+			
+			if (ValCodes.isOneByteValue(getValueAt(2))){
+				opString = opString.replaceAll("\\?2", ValCodes.getValString(getValueAt(2)));
+			} else{
+				opString = opString.replaceAll("\\?2", ValCodes.getValString(getValueAt(2), getValueAt(3)));
+			}
+		} 
+		else {
+			opString = opString.replaceAll("\\?1", ValCodes.getValString(getValueAt(1), getValueAt(2)));
+			
+			if (ValCodes.isOneByteValue(getValueAt(3))){
+				opString = opString.replaceAll("\\?2", ValCodes.getValString(getValueAt(3)));
+			} else{
+				opString = opString.replaceAll("\\?2", ValCodes.getValString(getValueAt(3), getValueAt(4)));
+			}
+		}
+
+		return opString;
 	}
 
 }

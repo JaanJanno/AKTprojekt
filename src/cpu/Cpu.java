@@ -137,6 +137,7 @@ public class Cpu implements Runnable{
 			branchController.doIfle();
 			break;
 		default:
+			poweredOn = false;
 			break;
 		}
 	}
@@ -209,6 +210,10 @@ public class Cpu implements Runnable{
 	
 	public void setPoweredOn(boolean poweredOn) {
 		this.poweredOn = poweredOn;
+	}
+	
+	public String getCurrentOpString() {
+		return evaluator.toString();
 	}
 }
 

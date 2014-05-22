@@ -91,7 +91,7 @@ public class BranchController {
 		}
 	}
 
-	private int argCount(int opCode){
+	public static int argCount(int opCode){
 		switch (opCode) {
 		
 		// Arithmetic
