@@ -22,7 +22,8 @@ public class MemoryStateCreator {
 	}
 	
 	public void add(int code){
-		memory[counter++].setValue(code);
+		if (counter < memory.length)
+			memory[counter++].setValue(code);
 	}
 	
 	public Byte32[] getState(){
