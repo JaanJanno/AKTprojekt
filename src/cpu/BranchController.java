@@ -22,8 +22,6 @@ public class BranchController {
 	public void doIfn() {
 		Byte32 first	= evaluator.nextValue();
 		Byte32 second 	= evaluator.nextValue();
-		System.out.println(first);
-		System.out.println(second);
 		if (first.getValue() == second.getValue())
 			skipInstruction();
 	}
