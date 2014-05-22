@@ -22,6 +22,8 @@ public class Cpu implements Runnable{
 	private StackController stackController;
 	private BranchController branchController;
 	
+	private String lastCommand = null;
+	
 	private void init(){
 		for(int i = 0; i < memory.length; i++){
 			memory[i] = new Byte32(0);
@@ -64,6 +66,8 @@ public class Cpu implements Runnable{
 	}
 
 	private void nextOperation() {
+		
+		lastCommand = evaluator.toString();
 
 		switch (evaluator.getNextOperationCode()) {
 		
@@ -213,7 +217,7 @@ public class Cpu implements Runnable{
 	}
 	
 	public String getCurrentOpString() {
-		return evaluator.toString();
+		return lastCommand;
 	}
 }
 
