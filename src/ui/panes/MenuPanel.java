@@ -15,21 +15,18 @@ import ui.App;
 
 import javax.swing.JSeparator;
 
-import main.ASMController;
-
 public class MenuPanel extends JPanel {
 
 	private static final long serialVersionUID = -7244016038731281136L;
 
+	@SuppressWarnings("unused")
 	private final App master;
-	private final ASMController asmController;
 
 	/**
 	 * Create the panel.
 	 */
-	public MenuPanel(final App master, ASMController asmController) {
+	public MenuPanel(final App master) {
 		this.master = master;
-		this.asmController = asmController;
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 434, 0 };
 		gridBagLayout.rowHeights = new int[] { 16, 0, 0, 0, 0, 0, 0, 0 };
@@ -38,13 +35,11 @@ public class MenuPanel extends JPanel {
 				0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
-		JButton btnSimpleMode = new JButton("Simple mode");
+		JButton btnSimpleMode = new JButton("CPU view");
 		btnSimpleMode.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				master.getFrmProjekt().setContentPane(
-						master.getSimpleModePanel());
-				master.getFrmProjekt().revalidate();
+				master.goToSimpleMode();
 			}
 		});
 		GridBagConstraints gbc_btnSimpleMode = new GridBagConstraints();
@@ -60,7 +55,12 @@ public class MenuPanel extends JPanel {
 		gbc_separator.gridy = 3;
 		add(separator, gbc_separator);
 
-		JButton btnAdvancedMode = new JButton("Advanced mode");
+		JButton btnAdvancedMode = new JButton("Instructions");
+		btnAdvancedMode.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				master.goToInstructions();
+			}
+		});
 		GridBagConstraints gbc_btnAdvancedMode = new GridBagConstraints();
 		gbc_btnAdvancedMode.insets = new Insets(0, 0, 5, 0);
 		gbc_btnAdvancedMode.gridx = 0;
