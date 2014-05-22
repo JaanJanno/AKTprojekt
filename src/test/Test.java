@@ -43,6 +43,10 @@ public class Test {
 		mem.addMov();
 			mem.addRegisterX();
 			mem.addLiteral(111);
+		mem.addShl();
+			mem.addPointer(0);
+			mem.addLiteral(5);
+			
 
 		mem.addShutDown();		
 

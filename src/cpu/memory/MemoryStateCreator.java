@@ -255,6 +255,27 @@ public class MemoryStateCreator {
 		add(OpCodes.XOR);
 	}
 	
+	public void addNot(){
+		
+		// NOT a
+		
+		add(OpCodes.NOT);
+	}
+	
+	public void addShr(){
+		
+		// NOT a
+		
+		add(OpCodes.SHR);
+	}
+	
+	public void addShl(){
+		
+		// NOT a
+		
+		add(OpCodes.SHL);
+	}
+	
 	public void addIfEq(){
 		
 		// IFE a, b

@@ -117,6 +117,8 @@ public class BranchController {
 			return 2;
 		case OpCodes.XOR:
 			return 2;
+		case OpCodes.NOT:
+			return 1;
 			
 		// Branching
 			
@@ -131,6 +133,13 @@ public class BranchController {
 		case OpCodes.IFGE:
 			return 2;
 		case OpCodes.IFLE:
+			return 2;
+			
+		// Bit shifts
+			
+		case OpCodes.SHR:
+			return 2;
+		case OpCodes.SHL:
 			return 2;
 			
 		// Stack

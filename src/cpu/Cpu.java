@@ -115,6 +115,18 @@ public class Cpu implements Runnable{
 		case OpCodes.XOR:			
 			LogicUnit.doXor(evaluator);
 			break;
+		case OpCodes.NOT:			
+			LogicUnit.doNot(evaluator);
+			break;
+			
+			// Bit shifts
+			
+		case OpCodes.SHL:			
+			LogicUnit.doShl(evaluator);
+			break;
+		case OpCodes.SHR:			
+			LogicUnit.doShr(evaluator);
+			break;
 			
 			// Control flow.
 			
@@ -156,6 +168,7 @@ public class Cpu implements Runnable{
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			poweredOn = false;
 		}
 	}
 	

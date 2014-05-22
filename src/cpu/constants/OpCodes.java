@@ -26,7 +26,7 @@ public class OpCodes {
 	// Bitshifts
 	
 	public static final int SHL 	= 19;
-	public static final int SHR 	= 20;
+	public static final int SHR 	= 7;
 	
 	// Control
 	
