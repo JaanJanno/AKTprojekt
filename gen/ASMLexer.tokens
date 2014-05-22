@@ -1,0 +1,13 @@
+RegisterValue=5
+SpecialValue=7
+Operator=4
+Whitespace=10
+NumberLiteral=9
+Label=8
+RegisterPointer=6
+T__1=2
+T__0=3
+T__2=1
+'['=3
+'+'=2
+']'=1
