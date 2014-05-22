@@ -15,7 +15,6 @@ import javax.swing.ListSelectionModel;
 
 import main.ASMController;
 import ui.App;
-import ui.constants.DefaultValues;
 import ui.panes.elements.FrequencyPanel;
 import ui.panes.elements.LeftScrollPanel;
 import ui.panes.elements.PointerPanel;
@@ -165,14 +164,10 @@ public class SimpleModePanel extends JPanel {
 		freqPanel.getMemField().setEnabled(false);
 		freqPanel.getFreqField().setEnabled(false);
 
-		int freq = freqPanel.getFreqFieldText().length() != 0 ? Integer
-				.parseInt(freqPanel.getFreqFieldText())
-				: DefaultValues.FREQUENCY;
-		int mem = freqPanel.getMemFieldText().length() != 0 ? Integer
-				.parseInt(freqPanel.getMemFieldText()) : DefaultValues.MEMORY;
-
-		freqPanel.setMemFieldText(Integer.toString(mem));
-		freqPanel.setFreqFieldText(Integer.toString(freq));
+		freqPanel.setMemFieldText(Integer.toString(freqPanel
+				.getMemFieldInteger()));
+		freqPanel.setFreqFieldText(Integer.toString(freqPanel
+				.getFreqFieldInteger()));
 
 	}
 
