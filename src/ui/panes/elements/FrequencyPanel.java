@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import ui.App;
 import ui.constants.DefaultValues;
 import main.ASMController;
+import java.awt.Dimension;
 
 public class FrequencyPanel extends JPanel {
 
@@ -34,6 +35,7 @@ public class FrequencyPanel extends JPanel {
 		add(label_8, gbc_label_8);
 
 		freqField = new IntegerField();
+		freqField.setMinimumSize(new Dimension(50, 20));
 		freqField.setText(Integer.toString(DefaultValues.FREQUENCY));
 		freqField.setColumns(10);
 		GridBagConstraints gbc_textField_12 = new GridBagConstraints();
@@ -50,6 +52,7 @@ public class FrequencyPanel extends JPanel {
 		add(label_9, gbc_label_9);
 
 		memField = new IntegerField();
+		memField.setMinimumSize(new Dimension(50, 20));
 		memField.setText(Integer.toString(DefaultValues.MEMORY));
 		memField.setColumns(10);
 		GridBagConstraints gbc_textField_13 = new GridBagConstraints();

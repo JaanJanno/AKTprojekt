@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.Dimension;
 
 public class RegisterPanel extends JPanel {
 
@@ -50,6 +51,7 @@ public class RegisterPanel extends JPanel {
 		add(lblRegister, gbc_lblRegister);
 
 		register1 = new JTextField();
+		register1.setMinimumSize(new Dimension(50, 20));
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.gridx = 1;
@@ -66,6 +68,7 @@ public class RegisterPanel extends JPanel {
 		add(lblRegister_1, gbc_lblRegister_1);
 
 		register2 = new JTextField();
+		register2.setMinimumSize(new Dimension(50, 20));
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_1.gridx = 1;
@@ -83,6 +86,7 @@ public class RegisterPanel extends JPanel {
 		add(lblRegister_2, gbc_lblRegister_2);
 
 		register3 = new JTextField();
+		register3.setMinimumSize(new Dimension(50, 20));
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_2.gridx = 1;
@@ -100,6 +104,7 @@ public class RegisterPanel extends JPanel {
 		add(lblRegister_3, gbc_lblRegister_3);
 
 		register4 = new JTextField();
+		register4.setMinimumSize(new Dimension(50, 20));
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_3.gridx = 1;
@@ -117,6 +122,7 @@ public class RegisterPanel extends JPanel {
 		add(lblRegister_4, gbc_lblRegister_4);
 
 		register5 = new JTextField();
+		register5.setMinimumSize(new Dimension(50, 20));
 		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
 		gbc_textField_4.insets = new Insets(0, 0, 5, 0);
 		gbc_textField_4.gridx = 1;
@@ -134,6 +140,7 @@ public class RegisterPanel extends JPanel {
 		add(lblRegister_5, gbc_lblRegister_5);
 
 		register6 = new JTextField();
+		register6.setMinimumSize(new Dimension(50, 20));
 		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
 		gbc_textField_5.gridx = 1;
 		gbc_textField_5.gridy = 6;

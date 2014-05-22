@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.Dimension;
 
 public class PointerPanel extends JPanel {
 
@@ -31,6 +32,7 @@ public class PointerPanel extends JPanel {
 		add(label_1, gbc_label_1);
 
 		stackPointer = new JTextField();
+		stackPointer.setMinimumSize(new Dimension(50, 20));
 		stackPointer.setEnabled(false);
 		stackPointer.setColumns(10);
 		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
@@ -47,6 +49,7 @@ public class PointerPanel extends JPanel {
 		add(label_2, gbc_label_2);
 
 		programCounter = new JTextField();
+		programCounter.setMinimumSize(new Dimension(50, 20));
 		programCounter.setEnabled(false);
 		programCounter.setEditable(false);
 		programCounter.setColumns(10);
