@@ -31,7 +31,7 @@ public class SimpleModePanel extends JPanel {
 	private final App master;
 	private final ASMController asmController;
 
-	private JFileChooser chooser;
+
 	private FrequencyPanel freqPanel;
 	private RegisterPanel regPanel;
 	private PointerPanel pointerPanel;
@@ -48,7 +48,7 @@ public class SimpleModePanel extends JPanel {
 		this.master = master;
 		this.asmController = asmController;
 
-		chooser = new JFileChooser();
+
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 220, 0, 250, 250, 0, 0 };
@@ -149,23 +149,15 @@ public class SimpleModePanel extends JPanel {
 		asmController.start(freq, mem);
 		freqPanel.setMemFieldText(Integer.toString(mem));
 		freqPanel.setFreqFieldText(Integer.toString(freq));
+		topPanel.getBtnStart().setEnabled(false);
 	}
 
-	public void loadAssembly() {
-		int returnVal = chooser.showOpenDialog(null);
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			int mem = freqPanel.getMemFieldText().length() != 0 ? Integer
-					.parseInt(freqPanel.getMemFieldText())
-					: DefaultValues.MEMORY;
-
-			asmController.loadFile(chooser.getSelectedFile().getAbsolutePath(),
-					mem);
-			rightPanel.setMessageLabelText("File loaded");
-			topPanel.getBtnStart().setEnabled(true);
-			freqPanel.getMemField().setEnabled(false);
-			freqPanel.getFreqField().setEnabled(false);
-		}
-
+	public void assemblyLoaded() {
+		rightPanel.setMessageLabelText("File loaded");
+		topPanel.getBtnStart().setEnabled(true);
+		freqPanel.getMemField().setEnabled(false);
+		freqPanel.getFreqField().setEnabled(false);
+		rightPanel.getBtnNextStep().setEnabled(true);
 	}
 
 	public void nextStep() {
@@ -243,6 +235,10 @@ public class SimpleModePanel extends JPanel {
 		panel_3.add(freqPanel, gbc_panel_2);
 
 		return panel_3;
+	}
+
+	public FrequencyPanel getFreqPanel() {
+		return freqPanel;
 	}
 
 }

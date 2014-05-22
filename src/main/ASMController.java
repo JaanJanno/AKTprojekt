@@ -3,13 +3,13 @@ package main;
 import java.util.List;
 
 public interface ASMController {
-	public void loadFile(String absoulutePath, int memory);
+	public void loadFile(String absoulutePath, int memory, int frequency);
 	
 	public void start(int frequency, int memory);
 	
 	public void stop();
 	
-	public void reset();
+	public void reset(int memory);
 	
 	public List<Integer> currentRegisterStatus();
 	

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -13,9 +14,11 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import main.ASMController;
+import ui.constants.DefaultValues;
 import ui.panes.HelpPanel;
 import ui.panes.MenuPanel;
 import ui.panes.SimpleModePanel;
+
 import javax.swing.JSeparator;
 
 public class App {
@@ -24,6 +27,7 @@ public class App {
 	private SimpleModePanel simpleModePanel;
 	private HelpPanel helpPanel;
 	private ASMController asmController;
+	private JFileChooser chooser;
 
 	/**
 	 * Create the application.
@@ -46,7 +50,7 @@ public class App {
 			e.printStackTrace();
 		}
 		initialize();
-		
+
 		// When in doubt, add moar threads
 		ExecutorService executorService = Executors.newFixedThreadPool(2);
 		executorService.execute(new Runnable() {
@@ -62,7 +66,7 @@ public class App {
 			}
 		});
 		executorService.shutdown();
-	
+
 	}
 
 	/**
@@ -97,10 +101,15 @@ public class App {
 				System.exit(1);
 			}
 		});
-		
+
 		JMenuItem mntmLoadAsmFile = new JMenuItem("Load ASM file");
+		mntmLoadAsmFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				loadAssembly();
+			}
+		});
 		mnNewMenu.add(mntmLoadAsmFile);
-		
+
 		JSeparator separator = new JSeparator();
 		mnNewMenu.add(separator);
 		mnNewMenu.add(mntmExit);
@@ -111,15 +120,20 @@ public class App {
 		JMenuItem mntmA = new JMenuItem("Reset everything");
 		mntmA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				asmController.reset();
+				int mem = getSimpleModePanel().getFreqPanel().getMemFieldText()
+						.length() != 0 ? Integer.parseInt(getSimpleModePanel()
+						.getFreqPanel().getMemFieldText())
+						: DefaultValues.MEMORY;
+
+				asmController.reset(mem);
 				resetApp();
 			}
 		});
 		mnStuff.add(mntmA);
-		
+
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
-		
+
 		JMenuItem mntmHelp = new JMenuItem("Help");
 		mntmHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -128,6 +142,8 @@ public class App {
 			}
 		});
 		mnHelp.add(mntmHelp);
+
+		chooser = new JFileChooser();
 	}
 
 	public MenuPanel getMenuPanel() {
@@ -141,7 +157,7 @@ public class App {
 			simpleModePanel = new SimpleModePanel(this, asmController);
 		return simpleModePanel;
 	}
-	
+
 	public HelpPanel getHelpPanel() {
 		if (helpPanel == null)
 			helpPanel = new HelpPanel();
@@ -155,12 +171,29 @@ public class App {
 	public void resetApp() {
 		getSimpleModePanel().reset();
 	}
-	
+
 	public void update() {
 		getSimpleModePanel().updatePointers();
 		getSimpleModePanel().updateRegisters();
 		getSimpleModePanel().updateLists();
-		
+
+	}
+
+	public void loadAssembly() {
+		int returnVal = chooser.showOpenDialog(null);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			int mem = getSimpleModePanel().getFreqPanel().getMemFieldText()
+					.length() != 0 ? Integer.parseInt(getSimpleModePanel()
+					.getFreqPanel().getMemFieldText()) : DefaultValues.MEMORY;
+					int freq = getSimpleModePanel().getFreqPanel().getFreqFieldText().length() != 0 ? Integer
+							.parseInt(getSimpleModePanel().getFreqPanel().getFreqFieldText())
+							: DefaultValues.FREQUENCY;
+			asmController.loadFile(chooser.getSelectedFile().getAbsolutePath(),
+					mem, freq);
+			getSimpleModePanel().assemblyLoaded();
+
+		}
+
 	}
 
 }

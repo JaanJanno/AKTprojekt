@@ -31,7 +31,8 @@ public class TopRightPanel extends JPanel {
 		gbl_panel_4.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gbl_panel_4);
 		
-		JButton btnNextStep = new JButton("Next step");
+		btnNextStep = new JButton("Next step");
+		btnNextStep.setEnabled(false);
 		btnNextStep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				master.getSimpleModePanel().nextStep();
@@ -72,6 +73,8 @@ public class TopRightPanel extends JPanel {
 
 	public void reset() {
 		messageLabel.setText("");
+		btnNextStep.setEnabled(false);
+		
 	}
 
 }

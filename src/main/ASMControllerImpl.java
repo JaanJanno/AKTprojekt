@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ui.constants.DefaultValues;
 import cpu.Cpu;
 import cpu.constants.Byte32;
 import cpu.memory.MemoryStateCreator;
@@ -16,14 +17,15 @@ public class ASMControllerImpl implements ASMController {
 	private MemoryStateCreator memState;
 
 	public ASMControllerImpl() {
-		cpu = new Cpu(30,1); 
+//		cpu = new Cpu(DefaultValues.MEMORY,1); 
 //		pinger = new Pinger();
 		pureAsm = new ArrayList<>();
 		asmReader = new AsmReader();
 	}
 
 	@Override
-	public void loadFile(String absoulutePath, int memory) {
+	public void loadFile(String absoulutePath, int memory, int frequency) {
+		cpu = new Cpu(memory, frequency);
 		try {
 			// currently test file
 			pureAsm = asmReader.readAsm("/test.asm");
@@ -31,16 +33,16 @@ public class ASMControllerImpl implements ASMController {
 			e.printStackTrace();
 		}
 		memState = createMemState(memory);
-
+		cpu.insertMemState(memState.getState());
 		Intro.window.update();
 
 	}
 
 	@Override
 	public void start(int frequency, int memory) {
-		cpu = new Cpu(memory, frequency);
+
 		Intro.window.update();
-		cpu.insertMemState(memState.getState());
+
 
 
 		cpu.start();
@@ -55,13 +57,13 @@ public class ASMControllerImpl implements ASMController {
 	}
 
 	@Override
-	public void reset() {
-		cpu = new Cpu(10, 0);
+	public void reset(int memory) {
+		cpu = new Cpu(memory, 0);
 
 		pureAsm.clear();
-		memState = new MemoryStateCreator(0);
+		memState = new MemoryStateCreator(memory);
 		cpu.insertMemState(memState.getState());
-		Intro.window.update();
+//		Intro.window.update();
 
 	}
 
@@ -111,6 +113,12 @@ public class ASMControllerImpl implements ASMController {
 			// Integer.toString(byteList[i].getValue());
 			output = String.format("%-3s : %-12s", Integer.toString(i),
 					Integer.toString(byteList[i].getValue()));
+			if(i == cpu.getProgramCounter().getValue()) {
+				output += "<- PC ";
+			}
+			if(i == cpu.getStackPointer().getValue()) {
+				output += "<- SP ";
+			}
 			memList.add(output);
 		}
 		return memList;
