@@ -243,11 +243,11 @@ public class MemoryStateCreator {
 		add(OpCodes.PUSH);
 	}
 	
-	public void addPop(){
+	public void addEPop(){
 		
 		// POP
 		
-		add(OpCodes.POP);
+		add(OpCodes.EPOP);
 	}
 	
 	public void addAnd(){

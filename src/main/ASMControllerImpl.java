@@ -155,7 +155,7 @@ public class ASMControllerImpl implements ASMController {
 			mem.addLiteral(5);
 		mem.addPush();
 			mem.addLiteral(5);
-		mem.addPop();
+		mem.addEPop();
 		mem.addIfEq();
 			mem.addLiteral(3);
 			mem.addLiteral(5);

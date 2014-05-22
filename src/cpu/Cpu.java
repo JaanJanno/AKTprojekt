@@ -102,8 +102,8 @@ public class Cpu implements Runnable{
 		case OpCodes.PUSH:
 			stackController.doPush(); 			
 			break;
-		case OpCodes.POP:			
-			stackController.doPop();
+		case OpCodes.EPOP:			
+			stackController.doEPop();
 			break;
 		
 			// Logic operators.

@@ -19,7 +19,7 @@ public class StackController {
 		memory[stackPointer.getPushValue()].setValue(pushed.getValue());
 	}
 	
-	public void doPop() {
+	public void doEPop() {
 		stackPointer.getNextValue();
 	}
 }

@@ -14,7 +14,7 @@ public class OpCodes {
 	// Stack
 	
 	public static final int PUSH  	= 6;
-	public static final int POP 	= 18;
+	public static final int EPOP 	= 18;
 	
 	// Logical
 	
@@ -58,8 +58,8 @@ public class OpCodes {
 			
 		case PUSH:			
 			return "PUSH ?1";
-		case POP:			
-			return "POP";
+		case EPOP:			
+			return "EPOP";
 			
 			
 		case AND:			

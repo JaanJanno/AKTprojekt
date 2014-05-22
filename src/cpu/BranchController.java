@@ -146,7 +146,7 @@ public class BranchController {
 			
 		case OpCodes.PUSH:
 			return 1;
-		case OpCodes.POP:
+		case OpCodes.EPOP:
 			return 0;
 			
 		// Control
