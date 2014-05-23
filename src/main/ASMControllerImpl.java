@@ -13,7 +13,7 @@ public class ASMControllerImpl implements ASMController {
 	private List<String> pureAsm; // THIS IS (PROBABLY) VERY BAD
 	private AsmReader asmReader;
 	private MemoryStateCreator memState;
-	private List<String> processedCommands; 
+	private List<String> processedCommands;
 
 	public ASMControllerImpl() {
 		pureAsm = new ArrayList<>();
@@ -26,7 +26,7 @@ public class ASMControllerImpl implements ASMController {
 		cpu = new Cpu(memory, frequency);
 		try {
 			// currently test file
-			pureAsm = asmReader.readAsm("/test.asm");
+			pureAsm = asmReader.readAsm(absoulutePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -42,15 +42,15 @@ public class ASMControllerImpl implements ASMController {
 		cpu.setLive(false);
 		cpu.start();
 	}
-	
+
 	@Override
 	public void runToEnd() {
-		while(cpu.isPoweredOn()) {
-			cpu.callStep();		
+		while (cpu.isPoweredOn()) {
+			cpu.callStep();
 			processedCommands.add(cpu.getCurrentOpString());
 			Intro.window.update();
 		}
-		
+
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class ASMControllerImpl implements ASMController {
 		memState = new MemoryStateCreator(memory);
 		cpu.insertMemState(memState.getState());
 		processedCommands.clear();
-//		Intro.window.update();
+		// Intro.window.update();
 
 	}
 
@@ -105,29 +105,27 @@ public class ASMControllerImpl implements ASMController {
 		Byte32[] byteList = cpu.getMemory();
 
 		for (int i = 0; i < byteList.length; i++) {
-			// output = Integer.toString(i) + " : " +
-			// Integer.toString(byteList[i].getValue());
 			output = String.format("%-3s : %-12s", Integer.toString(i),
 					Integer.toString(byteList[i].getValue()));
-			if(i == cpu.getProgramCounter().getValue()) {
+			if (i == cpu.getProgramCounter().getValue()) {
 				output += "<- PC ";
 			}
-			if(i == cpu.getStackPointer().getValue()) {
+			if (i == cpu.getStackPointer().getValue()) {
 				output += "<- SP ";
 			}
 			memList.add(output);
 		}
 		return memList;
 	}
-	
+
 	@Override
 	public void nextStep() {
 		cpu.callStep();
-		if(cpu.isPoweredOn())
+		if (cpu.isPoweredOn())
 			processedCommands.add(cpu.getCurrentOpString());
 		Intro.window.update();
 	}
-	
+
 	@Override
 	public List<String> getProcessedCommands() {
 
@@ -135,44 +133,11 @@ public class ASMControllerImpl implements ASMController {
 	}
 
 	private MemoryStateCreator createMemState(int memory) {
-		// TODO make pureAsm into memState. should put this method into
-		// asmReader
-		MemoryStateCreator mem = new MemoryStateCreator(memory);
-
-		mem.addAdd();
-			mem.addRegisterA();
-			mem.addLiteral(50);
-		mem.addOr();
-			mem.addPointer(2);
-			mem.addLiteral(66);
-		mem.addAdd();
-			mem.addPointer(5);
-			mem.addLiteral(5000);
-		mem.addAnd();
-			mem.addPointer(5);
-			mem.addLiteral(1023);
-		mem.addPush();
-			mem.addLiteral(5);
-		mem.addPush();
-			mem.addLiteral(5);
-		mem.addEPop();
-		mem.addIfEq();
-			mem.addLiteral(3);
-			mem.addLiteral(5);
-		mem.addMov();
-			mem.addRegisterB();
-			mem.addLiteral(111);
-		mem.addMov();
-			mem.addRegisterC();
-			mem.addLiteral(222);
-		mem.addIfNe();
-			mem.addLiteral(3);
-			mem.addLiteral(5);
-		mem.addMov();
-			mem.addRegisterX();
-			mem.addLiteral(111);
-		mem.addShutDown();
-		return mem;
+		String asm = "";
+		for (int i = 0; i < pureAsm.size(); i++) {
+			asm += pureAsm.get(i) + " ";
+		}
+		return compiler.Compiler.compileAsmToMem(asm, memory);
 	}
 
 }
