@@ -7,7 +7,9 @@ import gen.ASMLexer;
 import gen.ASMParser;
 import gen.ASMParser.LabelContext;
 import gen.ASMParser.LiteralContext;
+import gen.ASMParser.PoinerLabelContext;
 import gen.ASMParser.PoinerNumContext;
+import gen.ASMParser.PointerLabelPlusRegContext;
 import gen.ASMParser.PointerNumPlusRegContext;
 import gen.ASMParser.ProgramContext;
 import gen.ASMParser.RegisterContext;
@@ -61,6 +63,12 @@ public class Compiler {
 		else if (tree instanceof ASMParser.PointerNumPlusRegContext){
 			visitPointerNumPlusReg(mem, (PointerNumPlusRegContext)tree);
 		}
+		else if (tree instanceof ASMParser.PoinerLabelContext){
+			visitPointerLabel(mem, (PoinerLabelContext)tree);
+		}
+		else if (tree instanceof ASMParser.PointerLabelPlusRegContext){
+			visitPointerLabelPlusReg(mem, (PointerLabelPlusRegContext)tree);
+		}
 		else if (tree instanceof ASMParser.LiteralContext){
 			visitLiteral(mem, (LiteralContext)tree);
 		}
@@ -73,6 +81,29 @@ public class Compiler {
 		else if (tree instanceof ASMParser.SpecialValContext){
 			visitSpecialVal(mem, (SpecialValContext) tree);
 		}
+	}
+
+	private static void visitPointerLabelPlusReg(MemoryStateCreator mem, PointerLabelPlusRegContext tree) {
+		switch (tree.getChild(1).getText()) {
+			case "A":
+				mem.addRegisterA_pointerPlusLiteral(0);				break;
+			case "B":
+				mem.addRegisterB_pointerPlusLiteral(0);				break;
+			case "C":
+				mem.addRegisterC_pointerPlusLiteral(0);				break;
+			case "X":
+				mem.addRegisterX_pointerPlusLiteral(0);				break;
+			case "Y":
+				mem.addRegisterY_pointerPlusLiteral(0);				break;
+			case "Z":
+				mem.addRegisterZ_pointerPlusLiteral(0);				break;
+		}
+		labelUses.put(mem.getCounter()-1, tree.getChild(3).getText().substring(1, tree.getChild(3).getText().length()-1));
+	}
+
+	private static void visitPointerLabel(MemoryStateCreator mem, PoinerLabelContext tree) {
+		mem.addPointer(0);
+		labelUses.put(mem.getCounter()-1, tree.getChild(1).getText().substring(1, tree.getChild(1).getText().length()-1));
 	}
 
 	private static void visitSpecialVal(MemoryStateCreator mem,	SpecialValContext tree) {

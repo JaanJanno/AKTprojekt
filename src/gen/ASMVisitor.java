@@ -13,11 +13,11 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface ASMVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link ASMParser#statement}.
+	 * Visit a parse tree produced by {@link ASMParser#registerValue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatement(@NotNull ASMParser.StatementContext ctx);
+	T visitRegisterValue(@NotNull ASMParser.RegisterValueContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ASMParser#labelDeclaration}.
@@ -27,11 +27,39 @@ public interface ASMVisitor<T> extends ParseTreeVisitor<T> {
 	T visitLabelDeclaration(@NotNull ASMParser.LabelDeclarationContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link ASMParser#registerValue}.
+	 * Visit a parse tree produced by {@link ASMParser#poinerLabel}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRegisterValue(@NotNull ASMParser.RegisterValueContext ctx);
+	T visitPoinerLabel(@NotNull ASMParser.PoinerLabelContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ASMParser#pointerLabelPlusReg}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPointerLabelPlusReg(@NotNull ASMParser.PointerLabelPlusRegContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ASMParser#label}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLabel(@NotNull ASMParser.LabelContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ASMParser#registerPointer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ASMParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatement(@NotNull ASMParser.StatementContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ASMParser#poinerNum}.
@@ -55,13 +83,6 @@ public interface ASMVisitor<T> extends ParseTreeVisitor<T> {
 	T visitValue(@NotNull ASMParser.ValueContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link ASMParser#label}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitLabel(@NotNull ASMParser.LabelContext ctx);
-
-	/**
 	 * Visit a parse tree produced by {@link ASMParser#pointerNumPlusReg}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -69,11 +90,11 @@ public interface ASMVisitor<T> extends ParseTreeVisitor<T> {
 	T visitPointerNumPlusReg(@NotNull ASMParser.PointerNumPlusRegContext ctx);
 
 	/**
-	 * Visit a parse tree produced by {@link ASMParser#registerPointer}.
+	 * Visit a parse tree produced by {@link ASMParser#specialVal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx);
+	T visitSpecialVal(@NotNull ASMParser.SpecialValContext ctx);
 
 	/**
 	 * Visit a parse tree produced by {@link ASMParser#literal}.
@@ -81,11 +102,4 @@ public interface ASMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLiteral(@NotNull ASMParser.LiteralContext ctx);
-
-	/**
-	 * Visit a parse tree produced by {@link ASMParser#specialVal}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSpecialVal(@NotNull ASMParser.SpecialValContext ctx);
 }

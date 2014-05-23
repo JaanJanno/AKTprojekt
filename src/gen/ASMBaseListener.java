@@ -18,13 +18,13 @@ public class ASMBaseListener implements ASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatement(@NotNull ASMParser.StatementContext ctx) { }
+	@Override public void enterRegisterValue(@NotNull ASMParser.RegisterValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatement(@NotNull ASMParser.StatementContext ctx) { }
+	@Override public void exitRegisterValue(@NotNull ASMParser.RegisterValueContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -44,13 +44,65 @@ public class ASMBaseListener implements ASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRegisterValue(@NotNull ASMParser.RegisterValueContext ctx) { }
+	@Override public void enterPoinerLabel(@NotNull ASMParser.PoinerLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRegisterValue(@NotNull ASMParser.RegisterValueContext ctx) { }
+	@Override public void exitPoinerLabel(@NotNull ASMParser.PoinerLabelContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPointerLabelPlusReg(@NotNull ASMParser.PointerLabelPlusRegContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPointerLabelPlusReg(@NotNull ASMParser.PointerLabelPlusRegContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLabel(@NotNull ASMParser.LabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLabel(@NotNull ASMParser.LabelContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatement(@NotNull ASMParser.StatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatement(@NotNull ASMParser.StatementContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -96,19 +148,6 @@ public class ASMBaseListener implements ASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLabel(@NotNull ASMParser.LabelContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitLabel(@NotNull ASMParser.LabelContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPointerNumPlusReg(@NotNull ASMParser.PointerNumPlusRegContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -122,13 +161,13 @@ public class ASMBaseListener implements ASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx) { }
+	@Override public void enterSpecialVal(@NotNull ASMParser.SpecialValContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx) { }
+	@Override public void exitSpecialVal(@NotNull ASMParser.SpecialValContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -142,19 +181,6 @@ public class ASMBaseListener implements ASMListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLiteral(@NotNull ASMParser.LiteralContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSpecialVal(@NotNull ASMParser.SpecialValContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSpecialVal(@NotNull ASMParser.SpecialValContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
