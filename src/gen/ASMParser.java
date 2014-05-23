@@ -550,6 +550,45 @@ public class ASMParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class PoinerLabelContext extends PointerContext {
+		public LabelContext label() {
+			return getRuleContext(LabelContext.class,0);
+		}
+		public PoinerLabelContext(PointerContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).enterPoinerLabel(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).exitPoinerLabel(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ASMVisitor ) return ((ASMVisitor<? extends T>)visitor).visitPoinerLabel(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class PointerLabelPlusRegContext extends PointerContext {
+		public TerminalNode RegisterValue() { return getToken(ASMParser.RegisterValue, 0); }
+		public LabelContext label() {
+			return getRuleContext(LabelContext.class,0);
+		}
+		public PointerLabelPlusRegContext(PointerContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).enterPointerLabelPlusReg(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).exitPointerLabelPlusReg(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ASMVisitor ) return ((ASMVisitor<? extends T>)visitor).visitPointerLabelPlusReg(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class PointerNumPlusRegContext extends PointerContext {
 		public TerminalNode NumberLiteral() { return getToken(ASMParser.NumberLiteral, 0); }
 		public TerminalNode RegisterValue() { return getToken(ASMParser.RegisterValue, 0); }
@@ -573,7 +612,7 @@ public class ASMParser extends Parser {
 		PointerContext _localctx = new PointerContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_pointer);
 		try {
-			setState(61);
+			setState(71);
 			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				_localctx = new PointerNumPlusRegContext(_localctx);
@@ -588,12 +627,34 @@ public class ASMParser extends Parser {
 				break;
 
 			case 2:
-				_localctx = new PoinerNumContext(_localctx);
+				_localctx = new PointerLabelPlusRegContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(58); match(3);
-				setState(59); match(NumberLiteral);
-				setState(60); match(1);
+				setState(59); match(RegisterValue);
+				setState(60); match(2);
+				setState(61); label();
+				setState(62); match(1);
+				}
+				break;
+
+			case 3:
+				_localctx = new PoinerNumContext(_localctx);
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(64); match(3);
+				setState(65); match(NumberLiteral);
+				setState(66); match(1);
+				}
+				break;
+
+			case 4:
+				_localctx = new PoinerLabelContext(_localctx);
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(67); match(3);
+				setState(68); label();
+				setState(69); match(1);
 				}
 				break;
 			}
@@ -610,23 +671,25 @@ public class ASMParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\rB\4\2\t\2\4\3\t"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\rL\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\7\2"+
 		"\27\n\2\f\2\16\2\32\13\2\3\2\3\2\3\3\3\3\7\3 \n\3\f\3\16\3#\13\3\3\4\3"+
 		"\4\3\4\3\4\3\4\5\4*\n\4\3\5\3\5\3\6\3\6\3\7\3\7\5\7\62\n\7\3\b\3\b\3\t"+
-		"\3\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\n@\n\n\3\n\2\2\13\2\4\6\b\n\f\16"+
-		"\20\22\2\2A\2\30\3\2\2\2\4\35\3\2\2\2\6)\3\2\2\2\b+\3\2\2\2\n-\3\2\2\2"+
-		"\f\61\3\2\2\2\16\63\3\2\2\2\20\65\3\2\2\2\22?\3\2\2\2\24\27\5\4\3\2\25"+
-		"\27\5\20\t\2\26\24\3\2\2\2\26\25\3\2\2\2\27\32\3\2\2\2\30\26\3\2\2\2\30"+
-		"\31\3\2\2\2\31\33\3\2\2\2\32\30\3\2\2\2\33\34\7\2\2\3\34\3\3\2\2\2\35"+
-		"!\7\6\2\2\36 \5\6\4\2\37\36\3\2\2\2 #\3\2\2\2!\37\3\2\2\2!\"\3\2\2\2\""+
-		"\5\3\2\2\2#!\3\2\2\2$*\5\f\7\2%*\5\n\6\2&*\5\16\b\2\'*\5\22\n\2(*\5\b"+
-		"\5\2)$\3\2\2\2)%\3\2\2\2)&\3\2\2\2)\'\3\2\2\2)(\3\2\2\2*\7\3\2\2\2+,\7"+
-		"\t\2\2,\t\3\2\2\2-.\7\f\2\2.\13\3\2\2\2/\62\7\7\2\2\60\62\7\b\2\2\61/"+
-		"\3\2\2\2\61\60\3\2\2\2\62\r\3\2\2\2\63\64\7\n\2\2\64\17\3\2\2\2\65\66"+
-		"\7\13\2\2\66\21\3\2\2\2\678\7\5\2\289\7\7\2\29:\7\4\2\2:;\7\f\2\2;@\7"+
-		"\3\2\2<=\7\5\2\2=>\7\f\2\2>@\7\3\2\2?\67\3\2\2\2?<\3\2\2\2@\23\3\2\2\2"+
-		"\b\26\30!)\61?";
+		"\3\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3"+
+		"\n\3\n\5\nJ\n\n\3\n\2\2\13\2\4\6\b\n\f\16\20\22\2\2M\2\30\3\2\2\2\4\35"+
+		"\3\2\2\2\6)\3\2\2\2\b+\3\2\2\2\n-\3\2\2\2\f\61\3\2\2\2\16\63\3\2\2\2\20"+
+		"\65\3\2\2\2\22I\3\2\2\2\24\27\5\4\3\2\25\27\5\20\t\2\26\24\3\2\2\2\26"+
+		"\25\3\2\2\2\27\32\3\2\2\2\30\26\3\2\2\2\30\31\3\2\2\2\31\33\3\2\2\2\32"+
+		"\30\3\2\2\2\33\34\7\2\2\3\34\3\3\2\2\2\35!\7\6\2\2\36 \5\6\4\2\37\36\3"+
+		"\2\2\2 #\3\2\2\2!\37\3\2\2\2!\"\3\2\2\2\"\5\3\2\2\2#!\3\2\2\2$*\5\f\7"+
+		"\2%*\5\n\6\2&*\5\16\b\2\'*\5\22\n\2(*\5\b\5\2)$\3\2\2\2)%\3\2\2\2)&\3"+
+		"\2\2\2)\'\3\2\2\2)(\3\2\2\2*\7\3\2\2\2+,\7\t\2\2,\t\3\2\2\2-.\7\f\2\2"+
+		".\13\3\2\2\2/\62\7\7\2\2\60\62\7\b\2\2\61/\3\2\2\2\61\60\3\2\2\2\62\r"+
+		"\3\2\2\2\63\64\7\n\2\2\64\17\3\2\2\2\65\66\7\13\2\2\66\21\3\2\2\2\678"+
+		"\7\5\2\289\7\7\2\29:\7\4\2\2:;\7\f\2\2;J\7\3\2\2<=\7\5\2\2=>\7\7\2\2>"+
+		"?\7\4\2\2?@\5\16\b\2@A\7\3\2\2AJ\3\2\2\2BC\7\5\2\2CD\7\f\2\2DJ\7\3\2\2"+
+		"EF\7\5\2\2FG\5\16\b\2GH\7\3\2\2HJ\3\2\2\2I\67\3\2\2\2I<\3\2\2\2IB\3\2"+
+		"\2\2IE\3\2\2\2J\23\3\2\2\2\b\26\30!)\61I";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

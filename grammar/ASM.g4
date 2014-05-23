@@ -87,7 +87,9 @@ LabelDeclaration
 
 pointer
 	:	'[' RegisterValue '+' NumberLiteral ']' #   pointerNumPlusReg
+	|	'[' RegisterValue '+' label ']'         #   pointerLabelPlusReg
 	|	'[' NumberLiteral ']'                   #   poinerNum
+	|	'[' label ']'                           #   poinerLabel
 	;
 
 NumberLiteral

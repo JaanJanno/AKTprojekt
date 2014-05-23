@@ -10,15 +10,15 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface ASMListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link ASMParser#statement}.
+	 * Enter a parse tree produced by {@link ASMParser#registerValue}.
 	 * @param ctx the parse tree
 	 */
-	void enterStatement(@NotNull ASMParser.StatementContext ctx);
+	void enterRegisterValue(@NotNull ASMParser.RegisterValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ASMParser#statement}.
+	 * Exit a parse tree produced by {@link ASMParser#registerValue}.
 	 * @param ctx the parse tree
 	 */
-	void exitStatement(@NotNull ASMParser.StatementContext ctx);
+	void exitRegisterValue(@NotNull ASMParser.RegisterValueContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link ASMParser#labelDeclaration}.
@@ -32,15 +32,59 @@ public interface ASMListener extends ParseTreeListener {
 	void exitLabelDeclaration(@NotNull ASMParser.LabelDeclarationContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link ASMParser#registerValue}.
+	 * Enter a parse tree produced by {@link ASMParser#poinerLabel}.
 	 * @param ctx the parse tree
 	 */
-	void enterRegisterValue(@NotNull ASMParser.RegisterValueContext ctx);
+	void enterPoinerLabel(@NotNull ASMParser.PoinerLabelContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ASMParser#registerValue}.
+	 * Exit a parse tree produced by {@link ASMParser#poinerLabel}.
 	 * @param ctx the parse tree
 	 */
-	void exitRegisterValue(@NotNull ASMParser.RegisterValueContext ctx);
+	void exitPoinerLabel(@NotNull ASMParser.PoinerLabelContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link ASMParser#pointerLabelPlusReg}.
+	 * @param ctx the parse tree
+	 */
+	void enterPointerLabelPlusReg(@NotNull ASMParser.PointerLabelPlusRegContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ASMParser#pointerLabelPlusReg}.
+	 * @param ctx the parse tree
+	 */
+	void exitPointerLabelPlusReg(@NotNull ASMParser.PointerLabelPlusRegContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link ASMParser#label}.
+	 * @param ctx the parse tree
+	 */
+	void enterLabel(@NotNull ASMParser.LabelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ASMParser#label}.
+	 * @param ctx the parse tree
+	 */
+	void exitLabel(@NotNull ASMParser.LabelContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link ASMParser#registerPointer}.
+	 * @param ctx the parse tree
+	 */
+	void enterRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ASMParser#registerPointer}.
+	 * @param ctx the parse tree
+	 */
+	void exitRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link ASMParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatement(@NotNull ASMParser.StatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ASMParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatement(@NotNull ASMParser.StatementContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link ASMParser#poinerNum}.
@@ -76,17 +120,6 @@ public interface ASMListener extends ParseTreeListener {
 	void exitValue(@NotNull ASMParser.ValueContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link ASMParser#label}.
-	 * @param ctx the parse tree
-	 */
-	void enterLabel(@NotNull ASMParser.LabelContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ASMParser#label}.
-	 * @param ctx the parse tree
-	 */
-	void exitLabel(@NotNull ASMParser.LabelContext ctx);
-
-	/**
 	 * Enter a parse tree produced by {@link ASMParser#pointerNumPlusReg}.
 	 * @param ctx the parse tree
 	 */
@@ -98,15 +131,15 @@ public interface ASMListener extends ParseTreeListener {
 	void exitPointerNumPlusReg(@NotNull ASMParser.PointerNumPlusRegContext ctx);
 
 	/**
-	 * Enter a parse tree produced by {@link ASMParser#registerPointer}.
+	 * Enter a parse tree produced by {@link ASMParser#specialVal}.
 	 * @param ctx the parse tree
 	 */
-	void enterRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx);
+	void enterSpecialVal(@NotNull ASMParser.SpecialValContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link ASMParser#registerPointer}.
+	 * Exit a parse tree produced by {@link ASMParser#specialVal}.
 	 * @param ctx the parse tree
 	 */
-	void exitRegisterPointer(@NotNull ASMParser.RegisterPointerContext ctx);
+	void exitSpecialVal(@NotNull ASMParser.SpecialValContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link ASMParser#literal}.
@@ -118,15 +151,4 @@ public interface ASMListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLiteral(@NotNull ASMParser.LiteralContext ctx);
-
-	/**
-	 * Enter a parse tree produced by {@link ASMParser#specialVal}.
-	 * @param ctx the parse tree
-	 */
-	void enterSpecialVal(@NotNull ASMParser.SpecialValContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ASMParser#specialVal}.
-	 * @param ctx the parse tree
-	 */
-	void exitSpecialVal(@NotNull ASMParser.SpecialValContext ctx);
 }
