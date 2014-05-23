@@ -31,6 +31,19 @@ public class ASMBaseListener implements ASMListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLabelDeclaration(@NotNull ASMParser.LabelDeclarationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLabelDeclaration(@NotNull ASMParser.LabelDeclarationContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRegisterValue(@NotNull ASMParser.RegisterValueContext ctx) { }
 	/**
 	 * {@inheritDoc}

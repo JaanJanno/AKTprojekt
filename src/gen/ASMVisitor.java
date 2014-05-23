@@ -20,6 +20,13 @@ public interface ASMVisitor<T> extends ParseTreeVisitor<T> {
 	T visitStatement(@NotNull ASMParser.StatementContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link ASMParser#labelDeclaration}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLabelDeclaration(@NotNull ASMParser.LabelDeclarationContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link ASMParser#registerValue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -1,8 +1,9 @@
+LabelDeclaration=9
 RegisterValue=5
 SpecialValue=7
 Operator=4
-Whitespace=10
-NumberLiteral=9
+Whitespace=11
+NumberLiteral=10
 Label=8
 RegisterPointer=6
 T__1=2

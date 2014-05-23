@@ -1,7 +1,7 @@
 grammar ASM;
 
 program
-	:	(statement | label) (statement | label)* EOF
+	:	(statement | labelDeclaration) (statement | labelDeclaration)* EOF
 	;
 
 statement
@@ -68,8 +68,16 @@ label
 	:	Label
 	;
 
+labelDeclaration
+	:	LabelDeclaration
+	;
+
 Label
-	: ':' .* ':'
+	: ':' (.)*? ':'
+	;
+
+LabelDeclaration
+	: '_' (.)*? '_'
 	;
 
 pointer

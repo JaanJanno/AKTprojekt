@@ -36,6 +36,10 @@ public class Compiler {
 		
 		createMemState(mem, tree);
 		
+		for (int i: labelUses.keySet()){
+			mem.setMemSlot(i, labelLocations.get(labelUses.get(i)));
+		}
+		
 		return mem;
 	}
 	
@@ -114,7 +118,7 @@ public class Compiler {
 
 	private static void visitLabel(MemoryStateCreator mem, LabelContext tree) {
 		mem.addLiteral(0);
-		labelUses.put(mem.getCounter()-1, tree.getText());
+		labelUses.put(mem.getCounter()-1, tree.getText().substring(1, tree.getText().length()-1));
 	}
 
 	private static void visitStatement(MemoryStateCreator mem, StatementContext tree) {
@@ -195,8 +199,8 @@ public class Compiler {
 
 	private static void visitProgram(MemoryStateCreator mem, ASMParser.ProgramContext tree) {
 		for (ParseTree subTree : tree.children){			
-			if (subTree instanceof ASMParser.LabelContext){
-				labelLocations.put(subTree.getText(), mem.getCounter());
+			if (subTree instanceof ASMParser.LabelDeclarationContext){
+				labelLocations.put(subTree.getText().substring(1, subTree.getText().length()-1), mem.getCounter());
 			}
 			else if (subTree instanceof ASMParser.StatementContext){
 				createMemState(mem, subTree);

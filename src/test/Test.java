@@ -10,7 +10,15 @@ public class Test {
 		// TODO Auto-generated method stub
 		Cpu c = new Cpu(60, 1000);
 		
-		MemoryStateCreator mem = compileAsmToMem("ADD A, 5 MOV [A + 50], A", 100);
+		MemoryStateCreator mem = compileAsmToMem(
+				  "_ALGUS_\nADD A, 5 "
+				+ "MOV [A + 50], :TERE:"
+				+ "IFE A, 4"
+				+ "MOV B, C"
+				+ "\n_TERE_\n"
+				+ "MOV C, 3"
+						
+				, 100);
 
 		mem.addShutDown();		
 

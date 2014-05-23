@@ -21,6 +21,17 @@ public interface ASMListener extends ParseTreeListener {
 	void exitStatement(@NotNull ASMParser.StatementContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link ASMParser#labelDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterLabelDeclaration(@NotNull ASMParser.LabelDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ASMParser#labelDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitLabelDeclaration(@NotNull ASMParser.LabelDeclarationContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link ASMParser#registerValue}.
 	 * @param ctx the parse tree
 	 */
