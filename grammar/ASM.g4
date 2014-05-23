@@ -34,11 +34,20 @@ Operator
         ;
 
 value
-	:	RegisterValue
-	|	RegisterPointer
-	|	NumberLiteral
+	:	register
+	|	literal
+	|   label
 	|	pointer
 	;
+
+literal
+    :   NumberLiteral
+    ;
+
+register
+    :   RegisterValue       #   registerValue
+    |   RegisterPointer     #   registerPointer
+    ;
 
 RegisterValue
     : 'A'|'B'|'C'|'X'|'Y'|'Z'
@@ -64,8 +73,8 @@ Label
 	;
 
 pointer
-	:	'[' RegisterValue '+' NumberLiteral ']'
-	|	'[' NumberLiteral ']'
+	:	'[' RegisterValue '+' NumberLiteral ']' #   pointerNumPlusReg
+	|	'[' NumberLiteral ']'                   #   poinerNum
 	;
 
 NumberLiteral

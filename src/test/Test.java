@@ -2,6 +2,7 @@ package test;
 
 import cpu.Cpu;
 import cpu.memory.MemoryStateCreator;
+import static compiler.Compiler.*;
 
 public class Test {
 
@@ -9,30 +10,7 @@ public class Test {
 		// TODO Auto-generated method stub
 		Cpu c = new Cpu(60, 1000);
 		
-		MemoryStateCreator mem = new MemoryStateCreator(60);
-		
-		mem.addMov();
-			mem.addRegisterA();
-			mem.addLiteral(10);
-			
-		mem.addIfEq();
-			mem.addRegisterA();
-			mem.addLiteral(0);
-			
-		mem.addMov();
-			mem.addPc();
-			mem.addLiteral(23);
-			
-		mem.addPush();
-			mem.addLiteral(5);
-			
-		mem.addSub();
-			mem.addRegisterA();
-			mem.addLiteral(1);
-		
-		mem.addMov();
-			mem.addPc();
-			mem.addLiteral(4);
+		MemoryStateCreator mem = compileAsmToMem("ADD A, 5 MOV [A + 50], A", 100);
 
 		mem.addShutDown();		
 

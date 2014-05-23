@@ -16,7 +16,7 @@ public class MemoryStateCreator {
 	}
 	
 	public void setMemSlot(int index, int val){
-		memory[index].setValue(val);;
+		memory[index].setValue(val);
 	}
 	
 	public int getCounter(){

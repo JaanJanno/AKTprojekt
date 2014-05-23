@@ -1,6 +1,6 @@
 package gen;
 
-// Generated from C:/Users/Juhan/Documents/GitHub/AKTprojekt/grammar\ASM.g4 by ANTLR 4.x
+// Generated from /home/jaan/Documents/Java/AKTprojekt/grammar/ASM.g4 by ANTLR 4.x
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -23,10 +23,10 @@ public class ASMParser extends Parser {
 		"SpecialValue", "Label", "NumberLiteral", "Whitespace"
 	};
 	public static final int
-		RULE_program = 0, RULE_statement = 1, RULE_value = 2, RULE_label = 3, 
-		RULE_pointer = 4;
+		RULE_program = 0, RULE_statement = 1, RULE_value = 2, RULE_literal = 3, 
+		RULE_register = 4, RULE_label = 5, RULE_pointer = 6;
 	public static final String[] ruleNames = {
-		"program", "statement", "value", "label", "pointer"
+		"program", "statement", "value", "literal", "register", "label", "pointer"
 	};
 
 	@Override
@@ -88,47 +88,47 @@ public class ASMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(12);
+			setState(16);
 			switch (_input.LA(1)) {
 			case Operator:
 				{
-				setState(10); statement();
+				setState(14); statement();
 				}
 				break;
 			case Label:
 				{
-				setState(11); label();
+				setState(15); label();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(18);
+			setState(22);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==Operator || _la==Label) {
 				{
-				setState(16);
+				setState(20);
 				switch (_input.LA(1)) {
 				case Operator:
 					{
-					setState(14); statement();
+					setState(18); statement();
 					}
 					break;
 				case Label:
 					{
-					setState(15); label();
+					setState(19); label();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(20);
+				setState(24);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(21); match(EOF);
+			setState(25); match(EOF);
 			}
 		}
 		catch (RecognitionException re) {
@@ -172,27 +172,26 @@ public class ASMParser extends Parser {
 	public final StatementContext statement() throws RecognitionException {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_statement);
-		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(23); match(Operator);
-			setState(28);
-			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << RegisterValue) | (1L << RegisterPointer) | (1L << NumberLiteral))) != 0)) {
+			setState(27); match(Operator);
+			setState(32);
+			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+			case 1:
 				{
-				setState(24); value();
-				setState(26);
-				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << RegisterValue) | (1L << RegisterPointer) | (1L << NumberLiteral))) != 0)) {
+				setState(28); value();
+				setState(30);
+				switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+				case 1:
 					{
-					setState(25); value();
+					setState(29); value();
 					}
+					break;
 				}
-
 				}
+				break;
 			}
-
 			}
 		}
 		catch (RecognitionException re) {
@@ -207,12 +206,18 @@ public class ASMParser extends Parser {
 	}
 
 	public static class ValueContext extends ParserRuleContext {
-		public TerminalNode NumberLiteral() { return getToken(ASMParser.NumberLiteral, 0); }
-		public TerminalNode RegisterValue() { return getToken(ASMParser.RegisterValue, 0); }
 		public PointerContext pointer() {
 			return getRuleContext(PointerContext.class,0);
 		}
-		public TerminalNode RegisterPointer() { return getToken(ASMParser.RegisterPointer, 0); }
+		public LabelContext label() {
+			return getRuleContext(LabelContext.class,0);
+		}
+		public RegisterContext register() {
+			return getRuleContext(RegisterContext.class,0);
+		}
+		public LiteralContext literal() {
+			return getRuleContext(LiteralContext.class,0);
+		}
 		public ValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -236,30 +241,153 @@ public class ASMParser extends Parser {
 		ValueContext _localctx = new ValueContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_value);
 		try {
-			setState(34);
+			setState(38);
 			switch (_input.LA(1)) {
 			case RegisterValue:
+			case RegisterPointer:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(30); match(RegisterValue);
-				}
-				break;
-			case RegisterPointer:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(31); match(RegisterPointer);
+				setState(34); register();
 				}
 				break;
 			case NumberLiteral:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(35); literal();
+				}
+				break;
+			case Label:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(32); match(NumberLiteral);
+				setState(36); label();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(33); pointer();
+				setState(37); pointer();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class LiteralContext extends ParserRuleContext {
+		public TerminalNode NumberLiteral() { return getToken(ASMParser.NumberLiteral, 0); }
+		public LiteralContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_literal; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).enterLiteral(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).exitLiteral(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ASMVisitor ) return ((ASMVisitor<? extends T>)visitor).visitLiteral(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final LiteralContext literal() throws RecognitionException {
+		LiteralContext _localctx = new LiteralContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_literal);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(40); match(NumberLiteral);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class RegisterContext extends ParserRuleContext {
+		public RegisterContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_register; }
+	 
+		public RegisterContext() { }
+		public void copyFrom(RegisterContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class RegisterValueContext extends RegisterContext {
+		public TerminalNode RegisterValue() { return getToken(ASMParser.RegisterValue, 0); }
+		public RegisterValueContext(RegisterContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).enterRegisterValue(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).exitRegisterValue(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ASMVisitor ) return ((ASMVisitor<? extends T>)visitor).visitRegisterValue(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class RegisterPointerContext extends RegisterContext {
+		public TerminalNode RegisterPointer() { return getToken(ASMParser.RegisterPointer, 0); }
+		public RegisterPointerContext(RegisterContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).enterRegisterPointer(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).exitRegisterPointer(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ASMVisitor ) return ((ASMVisitor<? extends T>)visitor).visitRegisterPointer(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final RegisterContext register() throws RecognitionException {
+		RegisterContext _localctx = new RegisterContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_register);
+		try {
+			setState(44);
+			switch (_input.LA(1)) {
+			case RegisterValue:
+				_localctx = new RegisterValueContext(_localctx);
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(42); match(RegisterValue);
+				}
+				break;
+			case RegisterPointer:
+				_localctx = new RegisterPointerContext(_localctx);
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(43); match(RegisterPointer);
 				}
 				break;
 			default:
@@ -300,11 +428,11 @@ public class ASMParser extends Parser {
 
 	public final LabelContext label() throws RecognitionException {
 		LabelContext _localctx = new LabelContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_label);
+		enterRule(_localctx, 10, RULE_label);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(36); match(Label);
+			setState(46); match(Label);
 			}
 		}
 		catch (RecognitionException re) {
@@ -319,50 +447,77 @@ public class ASMParser extends Parser {
 	}
 
 	public static class PointerContext extends ParserRuleContext {
-		public TerminalNode NumberLiteral() { return getToken(ASMParser.NumberLiteral, 0); }
-		public TerminalNode RegisterValue() { return getToken(ASMParser.RegisterValue, 0); }
 		public PointerContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_pointer; }
+	 
+		public PointerContext() { }
+		public void copyFrom(PointerContext ctx) {
+			super.copyFrom(ctx);
+		}
+	}
+	public static class PoinerNumContext extends PointerContext {
+		public TerminalNode NumberLiteral() { return getToken(ASMParser.NumberLiteral, 0); }
+		public PoinerNumContext(PointerContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ASMListener ) ((ASMListener)listener).enterPointer(this);
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).enterPoinerNum(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ASMListener ) ((ASMListener)listener).exitPointer(this);
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).exitPoinerNum(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof ASMVisitor ) return ((ASMVisitor<? extends T>)visitor).visitPointer(this);
+			if ( visitor instanceof ASMVisitor ) return ((ASMVisitor<? extends T>)visitor).visitPoinerNum(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class PointerNumPlusRegContext extends PointerContext {
+		public TerminalNode NumberLiteral() { return getToken(ASMParser.NumberLiteral, 0); }
+		public TerminalNode RegisterValue() { return getToken(ASMParser.RegisterValue, 0); }
+		public PointerNumPlusRegContext(PointerContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).enterPointerNumPlusReg(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ASMListener ) ((ASMListener)listener).exitPointerNumPlusReg(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof ASMVisitor ) return ((ASMVisitor<? extends T>)visitor).visitPointerNumPlusReg(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final PointerContext pointer() throws RecognitionException {
 		PointerContext _localctx = new PointerContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_pointer);
+		enterRule(_localctx, 12, RULE_pointer);
 		try {
-			setState(46);
-			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
+			setState(56);
+			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
+				_localctx = new PointerNumPlusRegContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(38); match(3);
-				setState(39); match(RegisterValue);
-				setState(40); match(2);
-				setState(41); match(NumberLiteral);
-				setState(42); match(1);
+				setState(48); match(3);
+				setState(49); match(RegisterValue);
+				setState(50); match(2);
+				setState(51); match(NumberLiteral);
+				setState(52); match(1);
 				}
 				break;
 
 			case 2:
+				_localctx = new PoinerNumContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(43); match(3);
-				setState(44); match(NumberLiteral);
-				setState(45); match(1);
+				setState(53); match(3);
+				setState(54); match(NumberLiteral);
+				setState(55); match(1);
 				}
 				break;
 			}
@@ -379,20 +534,22 @@ public class ASMParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\f\63\4\2\t\2\4\3"+
-		"\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\5\2\17\n\2\3\2\3\2\7\2\23\n\2\f\2"+
-		"\16\2\26\13\2\3\2\3\2\3\3\3\3\3\3\5\3\35\n\3\5\3\37\n\3\3\4\3\4\3\4\3"+
-		"\4\5\4%\n\4\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\61\n\6\3\6\2\2"+
-		"\7\2\4\6\b\n\2\2\66\2\16\3\2\2\2\4\31\3\2\2\2\6$\3\2\2\2\b&\3\2\2\2\n"+
-		"\60\3\2\2\2\f\17\5\4\3\2\r\17\5\b\5\2\16\f\3\2\2\2\16\r\3\2\2\2\17\24"+
-		"\3\2\2\2\20\23\5\4\3\2\21\23\5\b\5\2\22\20\3\2\2\2\22\21\3\2\2\2\23\26"+
-		"\3\2\2\2\24\22\3\2\2\2\24\25\3\2\2\2\25\27\3\2\2\2\26\24\3\2\2\2\27\30"+
-		"\7\2\2\3\30\3\3\2\2\2\31\36\7\6\2\2\32\34\5\6\4\2\33\35\5\6\4\2\34\33"+
-		"\3\2\2\2\34\35\3\2\2\2\35\37\3\2\2\2\36\32\3\2\2\2\36\37\3\2\2\2\37\5"+
-		"\3\2\2\2 %\7\7\2\2!%\7\b\2\2\"%\7\13\2\2#%\5\n\6\2$ \3\2\2\2$!\3\2\2\2"+
-		"$\"\3\2\2\2$#\3\2\2\2%\7\3\2\2\2&\'\7\n\2\2\'\t\3\2\2\2()\7\5\2\2)*\7"+
-		"\7\2\2*+\7\4\2\2+,\7\13\2\2,\61\7\3\2\2-.\7\5\2\2./\7\13\2\2/\61\7\3\2"+
-		"\2\60(\3\2\2\2\60-\3\2\2\2\61\13\3\2\2\2\t\16\22\24\34\36$\60";
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\f=\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\3\2\3\2\5\2\23\n\2\3\2\3\2"+
+		"\7\2\27\n\2\f\2\16\2\32\13\2\3\2\3\2\3\3\3\3\3\3\5\3!\n\3\5\3#\n\3\3\4"+
+		"\3\4\3\4\3\4\5\4)\n\4\3\5\3\5\3\6\3\6\5\6/\n\6\3\7\3\7\3\b\3\b\3\b\3\b"+
+		"\3\b\3\b\3\b\3\b\5\b;\n\b\3\b\2\2\t\2\4\6\b\n\f\16\2\2?\2\22\3\2\2\2\4"+
+		"\35\3\2\2\2\6(\3\2\2\2\b*\3\2\2\2\n.\3\2\2\2\f\60\3\2\2\2\16:\3\2\2\2"+
+		"\20\23\5\4\3\2\21\23\5\f\7\2\22\20\3\2\2\2\22\21\3\2\2\2\23\30\3\2\2\2"+
+		"\24\27\5\4\3\2\25\27\5\f\7\2\26\24\3\2\2\2\26\25\3\2\2\2\27\32\3\2\2\2"+
+		"\30\26\3\2\2\2\30\31\3\2\2\2\31\33\3\2\2\2\32\30\3\2\2\2\33\34\7\2\2\3"+
+		"\34\3\3\2\2\2\35\"\7\6\2\2\36 \5\6\4\2\37!\5\6\4\2 \37\3\2\2\2 !\3\2\2"+
+		"\2!#\3\2\2\2\"\36\3\2\2\2\"#\3\2\2\2#\5\3\2\2\2$)\5\n\6\2%)\5\b\5\2&)"+
+		"\5\f\7\2\')\5\16\b\2($\3\2\2\2(%\3\2\2\2(&\3\2\2\2(\'\3\2\2\2)\7\3\2\2"+
+		"\2*+\7\13\2\2+\t\3\2\2\2,/\7\7\2\2-/\7\b\2\2.,\3\2\2\2.-\3\2\2\2/\13\3"+
+		"\2\2\2\60\61\7\n\2\2\61\r\3\2\2\2\62\63\7\5\2\2\63\64\7\7\2\2\64\65\7"+
+		"\4\2\2\65\66\7\13\2\2\66;\7\3\2\2\678\7\5\2\289\7\13\2\29;\7\3\2\2:\62"+
+		"\3\2\2\2:\67\3\2\2\2;\17\3\2\2\2\n\22\26\30 \"(.:";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
