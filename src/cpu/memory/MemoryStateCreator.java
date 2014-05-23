@@ -14,6 +14,14 @@ public class MemoryStateCreator {
 			memory[i] = new Byte32(0);
 		}
 	}
+	
+	public void setMemSlot(int index, int val){
+		memory[index].setValue(val);;
+	}
+	
+	public int getCounter(){
+		return counter;
+	}
 
 	public MemoryStateCreator(int memSize) {
 		this.memory = new Byte32[memSize];
