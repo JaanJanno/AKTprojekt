@@ -211,6 +211,10 @@ public class App {
 		getSimpleModePanel().updateLists();
 
 	}
+	
+	public void setMessage(String message) {
+		getSimpleModePanel().setMessage(message);
+	}
 
 	public void loadAssembly() {
 		int returnVal = chooser.showOpenDialog(null);

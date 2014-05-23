@@ -14,6 +14,7 @@ public class ASMControllerImpl implements ASMController {
 	private AsmReader asmReader;
 	private MemoryStateCreator memState;
 	private List<String> processedCommands;
+	public static boolean hadParseException = false;
 
 	public ASMControllerImpl() {
 		pureAsm = new ArrayList<>();
@@ -23,17 +24,26 @@ public class ASMControllerImpl implements ASMController {
 
 	@Override
 	public void loadFile(String absoulutePath, int memory, int frequency) {
+		reset(memory);
 		cpu = new Cpu(memory, frequency);
 		try {
 			// currently test file
-			if(absoulutePath.equals("/test.asm"))
+			if (absoulutePath.equals("/test.asm"))
 				pureAsm = asmReader.readAsmTest(absoulutePath);
 			else
 				pureAsm = asmReader.readAsm(absoulutePath);
+			Intro.window.setMessage("File loaded");
 		} catch (IOException e) {
+			Intro.window.setMessage("Could not load file");
 			e.printStackTrace();
 		}
 		memState = createMemState(memory);
+		// Currently unused
+		if (hadParseException) {
+			Intro.window
+					.setMessage("Something went wrong with parsing. Check console.");
+			hadParseException = false;
+		}
 		cpu.insertMemState(memState.getState());
 		Intro.window.update();
 
@@ -64,6 +74,7 @@ public class ASMControllerImpl implements ASMController {
 		memState = new MemoryStateCreator(memory);
 		cpu.insertMemState(memState.getState());
 		processedCommands.clear();
+		hadParseException = false;
 		// Intro.window.update();
 
 	}

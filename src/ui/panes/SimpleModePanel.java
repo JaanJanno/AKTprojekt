@@ -156,10 +156,10 @@ public class SimpleModePanel extends JPanel {
 		asmController.runToEnd();
 		topPanel.getBtnStart().setEnabled(false);
 		rightPanel.getBtnNextStep().setEnabled(false);
+		topPanel.getBtnRunToEnd().setEnabled(false);
 	}
 
 	public void assemblyLoaded() {
-		rightPanel.setMessageLabelText("File loaded");
 		topPanel.getBtnStart().setEnabled(true);
 		freqPanel.getMemField().setEnabled(false);
 		freqPanel.getFreqField().setEnabled(false);
@@ -168,6 +168,9 @@ public class SimpleModePanel extends JPanel {
 				.getMemFieldInteger()));
 		freqPanel.setFreqFieldText(Integer.toString(freqPanel
 				.getFreqFieldInteger()));
+		topPanel.getBtnRunToEnd().setEnabled(false);
+		rightPanel.getBtnNextStep().setEnabled(false);		
+		
 
 	}
 
@@ -184,6 +187,10 @@ public class SimpleModePanel extends JPanel {
 		for (int i = 0; i < memList.size(); i++) {
 			memoryListModel.addElement(memList.get(i));
 		}
+	}
+	
+	public void setMessage(String string) {
+		rightPanel.setMessageLabelText(string);		
 	}
 
 	private JList<String> createScrollList(DefaultListModel<String> model) {
