@@ -1,7 +1,7 @@
 grammar ASM;
 
 program
-	:	(statement | labelDeclaration) (statement | labelDeclaration)* EOF
+	:	(statement | labelDeclaration)* EOF
 	;
 
 statement

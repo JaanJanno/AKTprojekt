@@ -90,47 +90,32 @@ public class ASMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(20);
-			switch (_input.LA(1)) {
-			case Operator:
-				{
-				setState(18); statement();
-				}
-				break;
-			case LabelDeclaration:
-				{
-				setState(19); labelDeclaration();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			setState(26);
+			setState(22);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==Operator || _la==LabelDeclaration) {
 				{
-				setState(24);
+				setState(20);
 				switch (_input.LA(1)) {
 				case Operator:
 					{
-					setState(22); statement();
+					setState(18); statement();
 					}
 					break;
 				case LabelDeclaration:
 					{
-					setState(23); labelDeclaration();
+					setState(19); labelDeclaration();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(28);
+				setState(24);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(29); match(EOF);
+			setState(25); match(EOF);
 			}
 		}
 		catch (RecognitionException re) {
@@ -178,17 +163,17 @@ public class ASMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(31); match(Operator);
-			setState(36);
+			setState(27); match(Operator);
+			setState(32);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << RegisterValue) | (1L << RegisterPointer) | (1L << SpecialValue) | (1L << Label) | (1L << NumberLiteral))) != 0)) {
 				{
-				setState(32); value();
-				setState(34);
+				setState(28); value();
+				setState(30);
 				_la = _input.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << 3) | (1L << RegisterValue) | (1L << RegisterPointer) | (1L << SpecialValue) | (1L << Label) | (1L << NumberLiteral))) != 0)) {
 					{
-					setState(33); value();
+					setState(29); value();
 					}
 				}
 
@@ -247,37 +232,37 @@ public class ASMParser extends Parser {
 		ValueContext _localctx = new ValueContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_value);
 		try {
-			setState(43);
+			setState(39);
 			switch (_input.LA(1)) {
 			case RegisterValue:
 			case RegisterPointer:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(38); register();
+				setState(34); register();
 				}
 				break;
 			case NumberLiteral:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(39); literal();
+				setState(35); literal();
 				}
 				break;
 			case Label:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(40); label();
+				setState(36); label();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(41); pointer();
+				setState(37); pointer();
 				}
 				break;
 			case SpecialValue:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(42); specialVal();
+				setState(38); specialVal();
 				}
 				break;
 			default:
@@ -322,7 +307,7 @@ public class ASMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(45); match(SpecialValue);
+			setState(41); match(SpecialValue);
 			}
 		}
 		catch (RecognitionException re) {
@@ -363,7 +348,7 @@ public class ASMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(47); match(NumberLiteral);
+			setState(43); match(NumberLiteral);
 			}
 		}
 		catch (RecognitionException re) {
@@ -427,20 +412,20 @@ public class ASMParser extends Parser {
 		RegisterContext _localctx = new RegisterContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_register);
 		try {
-			setState(51);
+			setState(47);
 			switch (_input.LA(1)) {
 			case RegisterValue:
 				_localctx = new RegisterValueContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(49); match(RegisterValue);
+				setState(45); match(RegisterValue);
 				}
 				break;
 			case RegisterPointer:
 				_localctx = new RegisterPointerContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(50); match(RegisterPointer);
+				setState(46); match(RegisterPointer);
 				}
 				break;
 			default:
@@ -485,7 +470,7 @@ public class ASMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(53); match(Label);
+			setState(49); match(Label);
 			}
 		}
 		catch (RecognitionException re) {
@@ -526,7 +511,7 @@ public class ASMParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(55); match(LabelDeclaration);
+			setState(51); match(LabelDeclaration);
 			}
 		}
 		catch (RecognitionException re) {
@@ -591,17 +576,17 @@ public class ASMParser extends Parser {
 		PointerContext _localctx = new PointerContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_pointer);
 		try {
-			setState(65);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			setState(61);
+			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				_localctx = new PointerNumPlusRegContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(57); match(3);
-				setState(58); match(RegisterValue);
-				setState(59); match(2);
-				setState(60); match(NumberLiteral);
-				setState(61); match(1);
+				setState(53); match(3);
+				setState(54); match(RegisterValue);
+				setState(55); match(2);
+				setState(56); match(NumberLiteral);
+				setState(57); match(1);
 				}
 				break;
 
@@ -609,9 +594,9 @@ public class ASMParser extends Parser {
 				_localctx = new PoinerNumContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(62); match(3);
-				setState(63); match(NumberLiteral);
-				setState(64); match(1);
+				setState(58); match(3);
+				setState(59); match(NumberLiteral);
+				setState(60); match(1);
 				}
 				break;
 			}
@@ -628,24 +613,23 @@ public class ASMParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\rF\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\5\2"+
-		"\27\n\2\3\2\3\2\7\2\33\n\2\f\2\16\2\36\13\2\3\2\3\2\3\3\3\3\3\3\5\3%\n"+
-		"\3\5\3\'\n\3\3\4\3\4\3\4\3\4\3\4\5\4.\n\4\3\5\3\5\3\6\3\6\3\7\3\7\5\7"+
-		"\66\n\7\3\b\3\b\3\t\3\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\nD\n\n\3\n\2"+
-		"\2\13\2\4\6\b\n\f\16\20\22\2\2G\2\26\3\2\2\2\4!\3\2\2\2\6-\3\2\2\2\b/"+
-		"\3\2\2\2\n\61\3\2\2\2\f\65\3\2\2\2\16\67\3\2\2\2\209\3\2\2\2\22C\3\2\2"+
-		"\2\24\27\5\4\3\2\25\27\5\20\t\2\26\24\3\2\2\2\26\25\3\2\2\2\27\34\3\2"+
-		"\2\2\30\33\5\4\3\2\31\33\5\20\t\2\32\30\3\2\2\2\32\31\3\2\2\2\33\36\3"+
-		"\2\2\2\34\32\3\2\2\2\34\35\3\2\2\2\35\37\3\2\2\2\36\34\3\2\2\2\37 \7\2"+
-		"\2\3 \3\3\2\2\2!&\7\6\2\2\"$\5\6\4\2#%\5\6\4\2$#\3\2\2\2$%\3\2\2\2%\'"+
-		"\3\2\2\2&\"\3\2\2\2&\'\3\2\2\2\'\5\3\2\2\2(.\5\f\7\2).\5\n\6\2*.\5\16"+
-		"\b\2+.\5\22\n\2,.\5\b\5\2-(\3\2\2\2-)\3\2\2\2-*\3\2\2\2-+\3\2\2\2-,\3"+
-		"\2\2\2.\7\3\2\2\2/\60\7\t\2\2\60\t\3\2\2\2\61\62\7\f\2\2\62\13\3\2\2\2"+
-		"\63\66\7\7\2\2\64\66\7\b\2\2\65\63\3\2\2\2\65\64\3\2\2\2\66\r\3\2\2\2"+
-		"\678\7\n\2\28\17\3\2\2\29:\7\13\2\2:\21\3\2\2\2;<\7\5\2\2<=\7\7\2\2=>"+
-		"\7\4\2\2>?\7\f\2\2?D\7\3\2\2@A\7\5\2\2AB\7\f\2\2BD\7\3\2\2C;\3\2\2\2C"+
-		"@\3\2\2\2D\23\3\2\2\2\n\26\32\34$&-\65C";
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\rB\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\3\2\7\2"+
+		"\27\n\2\f\2\16\2\32\13\2\3\2\3\2\3\3\3\3\3\3\5\3!\n\3\5\3#\n\3\3\4\3\4"+
+		"\3\4\3\4\3\4\5\4*\n\4\3\5\3\5\3\6\3\6\3\7\3\7\5\7\62\n\7\3\b\3\b\3\t\3"+
+		"\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\3\n\5\n@\n\n\3\n\2\2\13\2\4\6\b\n\f\16"+
+		"\20\22\2\2B\2\30\3\2\2\2\4\35\3\2\2\2\6)\3\2\2\2\b+\3\2\2\2\n-\3\2\2\2"+
+		"\f\61\3\2\2\2\16\63\3\2\2\2\20\65\3\2\2\2\22?\3\2\2\2\24\27\5\4\3\2\25"+
+		"\27\5\20\t\2\26\24\3\2\2\2\26\25\3\2\2\2\27\32\3\2\2\2\30\26\3\2\2\2\30"+
+		"\31\3\2\2\2\31\33\3\2\2\2\32\30\3\2\2\2\33\34\7\2\2\3\34\3\3\2\2\2\35"+
+		"\"\7\6\2\2\36 \5\6\4\2\37!\5\6\4\2 \37\3\2\2\2 !\3\2\2\2!#\3\2\2\2\"\36"+
+		"\3\2\2\2\"#\3\2\2\2#\5\3\2\2\2$*\5\f\7\2%*\5\n\6\2&*\5\16\b\2\'*\5\22"+
+		"\n\2(*\5\b\5\2)$\3\2\2\2)%\3\2\2\2)&\3\2\2\2)\'\3\2\2\2)(\3\2\2\2*\7\3"+
+		"\2\2\2+,\7\t\2\2,\t\3\2\2\2-.\7\f\2\2.\13\3\2\2\2/\62\7\7\2\2\60\62\7"+
+		"\b\2\2\61/\3\2\2\2\61\60\3\2\2\2\62\r\3\2\2\2\63\64\7\n\2\2\64\17\3\2"+
+		"\2\2\65\66\7\13\2\2\66\21\3\2\2\2\678\7\5\2\289\7\7\2\29:\7\4\2\2:;\7"+
+		"\f\2\2;@\7\3\2\2<=\7\5\2\2=>\7\f\2\2>@\7\3\2\2?\67\3\2\2\2?<\3\2\2\2@"+
+		"\23\3\2\2\2\t\26\30 \")\61?";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
