@@ -60,6 +60,10 @@
                 <b>MOV a, b</b> - <i>kopeerib</i> väärtuse b väärtusesse a.
             </p>
 
+            <p>
+                <b>DAT a, b .. n</b> - lisab toorelt mälusse argumendiks antud väärtused. Võib lisada kuitahes palju argumente.
+            </p>
+
             <h3>Aritmeetilised tehted</h3>
 
             <p>
@@ -150,6 +154,18 @@
 
             <p>
                 <b>SD</b> - <i>shut down</i>. Lõpetab protsessori töö.
+            </p>
+
+            <h3>Label'id</h3>
+
+            Nb, labelid eksisteerivad ainult assemblerkeeles. Kompileerimise ajal asendatakse kõik labelid arvudega ning cpu ei tea labelite kohta midagi.
+
+            <p>
+                <b>_mingistring_</b> - <i>label'i</i> deklaratsioon. Selle nime alt saab hiljem kätte labelile järgneva käsu mälupesa aadressi.
+            </p>
+
+            <p>
+                <b>:mingistring:</b> - <i>label'i</i> kasutamine väärtusena. Kasutab deklareeritud labeli mälupesa aadressi väärtusena. Näiteks <i>MOV PC, :label:</i> liigutab <i>program counteri</i> labeli <i>label</i> all oleva käsu juurde.
             </p>
 
         </div>
