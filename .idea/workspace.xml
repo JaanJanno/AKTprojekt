@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ebdae842-b512-4071-aa12-8f2eff32b348" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grammar/ASM.g4" afterPath="$PROJECT_DIR$/grammar/ASM.g4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compiler/Compiler.java" afterPath="$PROJECT_DIR$/src/compiler/Compiler.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resources/test.asm" afterPath="$PROJECT_DIR$/src/resources/test.asm" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -30,8 +31,8 @@
       <file leaf-file-name="ASM.g4" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/grammar/ASM.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.69138277" vertical-offset="0" max-vertical-offset="1575">
-              <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+            <state vertical-scroll-proportion="0.21042085" vertical-offset="0" max-vertical-offset="1575">
+              <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -466,8 +467,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grammar/ASM.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69138277" vertical-offset="0" max-vertical-offset="1575">
-          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
+        <state vertical-scroll-proportion="0.21042085" vertical-offset="0" max-vertical-offset="1575">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
           <folding />
         </state>
       </provider>

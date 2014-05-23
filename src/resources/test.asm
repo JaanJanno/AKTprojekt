@@ -7,3 +7,4 @@ SUB A, 1
 MOV PC, :check:
 _end_
 SD
+DAT 555, 654, 76

@@ -5,7 +5,7 @@ program
 	;
 
 statement
-	:	Operator (value (value)?)?
+	:	Operator (value)*
 	;
 
 Operator

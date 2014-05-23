@@ -23,10 +23,6 @@ import cpu.memory.MemoryStateCreator;
 
 public class Compiler {
 	
-	public static void main(String[] args) {
-		System.out.println();
-	}
-	
 	static Map<Integer, String> labelUses;
 	static Map<String,Integer>  labelLocations;
 	
@@ -141,9 +137,16 @@ public class Compiler {
 	}
 
 	private static void visitStatement(MemoryStateCreator mem, StatementContext tree) {
-		visitOpCode(mem, tree.getChild(0));
-		for (int i=1; i<tree.getChildCount(); i++){
-			createMemState(mem, tree.getChild(i));
+		if (tree.getChild(0).getText().equals("DAT")){
+			for (int i=1; i<tree.getChildCount(); i++){
+				mem.add(Integer.parseInt(tree.getChild(i).getText()));
+			}
+		} 
+		else {
+			visitOpCode(mem, tree.getChild(0));
+			for (int i=1; i<tree.getChildCount(); i++){
+				createMemState(mem, tree.getChild(i));
+			}
 		}
 	}
 
@@ -195,7 +198,7 @@ public class Compiler {
 			case "IFGE":					
 				mem.addIfGe();				break;			
 			case "IFLE":					
-				mem.addIfLe();				break;			
+				mem.addIfLe();				break;
 		}
 	}
 
