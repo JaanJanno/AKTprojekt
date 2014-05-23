@@ -118,4 +118,15 @@ public interface ASMListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLiteral(@NotNull ASMParser.LiteralContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link ASMParser#specialVal}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecialVal(@NotNull ASMParser.SpecialValContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ASMParser#specialVal}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecialVal(@NotNull ASMParser.SpecialValContext ctx);
 }

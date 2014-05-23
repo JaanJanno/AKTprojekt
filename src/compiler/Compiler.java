@@ -2,6 +2,7 @@ package compiler;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import gen.ASMLexer;
 import gen.ASMParser;
 import gen.ASMParser.LabelContext;
@@ -11,7 +12,9 @@ import gen.ASMParser.PointerNumPlusRegContext;
 import gen.ASMParser.ProgramContext;
 import gen.ASMParser.RegisterContext;
 import gen.ASMParser.RegisterPointerContext;
+import gen.ASMParser.SpecialValContext;
 import gen.ASMParser.StatementContext;
+
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -70,6 +73,22 @@ public class Compiler {
 		}
 		else if (tree instanceof ASMParser.RegisterPointerContext){
 			visitRegisterPointer(mem, (RegisterPointerContext) tree);
+		}
+		else if (tree instanceof ASMParser.SpecialValContext){
+			visitSpecialVal(mem, (SpecialValContext) tree);
+		}
+	}
+
+	private static void visitSpecialVal(MemoryStateCreator mem,	SpecialValContext tree) {
+		switch (tree.getText()) {
+			case "SP":
+				mem.addSp();				break;
+			case "PC":
+				mem.addPc();				break;
+			case "POP":
+				mem.addPop();				break;
+			case "PEEK":
+				mem.addPeek();				break;
 		}
 	}
 

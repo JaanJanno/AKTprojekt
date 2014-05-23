@@ -92,9 +92,9 @@ public class Evaluator {
 			// Stack top element values.
 			
 		case ValCodes.POP:
-			return getMemReference(stackPointer.getNextValue());
+			return getMemReference(stackPointer.getNextValue()+1);
 		case ValCodes.PEEK:
-			return getMemReference(stackPointer.getValue());
+			return getMemReference(stackPointer.getValue()+1);
 			
 			// SP and PC values.
 			

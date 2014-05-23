@@ -38,6 +38,22 @@ public class MemoryStateCreator {
 		return memory;
 	}
 	
+	public void addPop(){
+		
+		// POP
+		
+		add(ValCodes.POP);
+		
+	}
+	
+	public void addPeek(){
+		
+		// PEEK
+		
+		add(ValCodes.PEEK);
+		
+	}
+	
 	public void addSp(){
 		
 		// SP
@@ -253,7 +269,7 @@ public class MemoryStateCreator {
 	
 	public void addEPop(){
 		
-		// POP
+		// EPOP
 		
 		add(OpCodes.EPOP);
 	}

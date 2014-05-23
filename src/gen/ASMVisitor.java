@@ -81,4 +81,11 @@ public interface ASMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLiteral(@NotNull ASMParser.LiteralContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ASMParser#specialVal}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSpecialVal(@NotNull ASMParser.SpecialValContext ctx);
 }

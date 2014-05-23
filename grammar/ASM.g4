@@ -28,7 +28,7 @@ Operator
         | 'NOT'
         | 'SHR'
         | 'SHL'
-        | 'POP'
+        | 'EPOP'
         | 'SD'
         | 'DAT'
         ;
@@ -38,7 +38,12 @@ value
 	|	literal
 	|   label
 	|	pointer
+	|   specialVal
 	;
+
+specialVal
+    :   SpecialValue
+    ;
 
 literal
     :   NumberLiteral
