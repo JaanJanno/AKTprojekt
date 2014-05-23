@@ -26,7 +26,10 @@ public class ASMControllerImpl implements ASMController {
 		cpu = new Cpu(memory, frequency);
 		try {
 			// currently test file
-			pureAsm = asmReader.readAsm(absoulutePath);
+			if(absoulutePath.equals("/test.asm"))
+				pureAsm = asmReader.readAsmTest(absoulutePath);
+			else
+				pureAsm = asmReader.readAsm(absoulutePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
