@@ -2,7 +2,7 @@ SimplASM
 ==========
 Koostajad: Jaan Janno, Tõnis Kasekamp, Juhan-Rasmus Risti
 
-SimplASM on projekt, mis hõlmab endas assemblerkeelt ja virtuaalmasinat, mille peal saab jooksutada selles keeles loodud programme.
+SimplASM on projekt, mis hõlmab endas assemblerkeelt ja virtuaalmasinat, mille peal saab jooksutada selles keeles loodud programme. Projekti eesmärgiks on tutvustada assemblerkeele tööpõhimõtet ja protseduure selle huvilistele.
 
 #### Toetatud väärtused
 
@@ -12,7 +12,7 @@ SimplASM on projekt, mis hõlmab endas assemblerkeelt ja virtuaalmasinat, mille 
 
 **A B C X Y Z** - kuus erinevat registrit.
 
-**[A] [B] [C] [X] [Y] [Z]* - kuus registrit on kasutatavad ka pointeritena, kus registri sisu viitab mälupesale.
+**[A] [B] [C] [X] [Y] [Z]** - kuus registrit on kasutatavad ka pointeritena, kus registri sisu viitab mälupesale.
 
 **[A + arvuliteraal] .. [Z + arvuliteraal]** - kuus registrit on kasutatavad pointeritena ka sellisel viisil, kus registri sisu ja arvuliteraali summa viitab mälupesale.
 
@@ -30,7 +30,7 @@ SimplASM on projekt, mis hõlmab endas assemblerkeelt ja virtuaalmasinat, mille 
 
 **DAT a, b .. n** - lisab toorelt mälusse argumendiks antud väärtused. Võib lisada kuitahes palju argumente.
 
-#### Aritmeetilised tehted
+##### Aritmeetilised tehted
 
 **ADD a, b** - liidab väärtusele a väärtuse b.
 
@@ -42,13 +42,13 @@ SimplASM on projekt, mis hõlmab endas assemblerkeelt ja virtuaalmasinat, mille 
 
 **MOD a, b** - omistab väärtusele a jäägi jagatisest a / b.
 
-#### Tehted magasiniga
+##### Tehted magasiniga
 
 **EPOP** - tõstab stack pointerit ühe võrra.
 
 **PUSH a** - lahutab stack pointerist ühe ja lisab stack pointeri poolt viidatavale mälupesale väärtuse a.
 
-#### Loogikatehted
+##### Loogikatehted
 
 **AND a, b** - väärtusesse a omistatakse a ja b bitwise and tehte tulemus.
 
@@ -58,7 +58,7 @@ SimplASM on projekt, mis hõlmab endas assemblerkeelt ja virtuaalmasinat, mille 
 
 **NOT a** - väärtuseks a omistatakse tema bitwise not tehte tulemus.
 
-#### Branching
+##### _Branching_
 
 **IFE a, b** - kui väärtused a ja b on võrdsed, siis täidetakse järgmine käsk, muul juhul hüpatakse järgmisest käsust üle.
 
@@ -72,17 +72,17 @@ SimplASM on projekt, mis hõlmab endas assemblerkeelt ja virtuaalmasinat, mille 
 
 **IFLE a, b** - kui väärtus a on võrdne või väiksem b-st, siis täidetakse järgmine käsk, muul juhul hüpatakse järgmisest käsust üle.
 
-#### Bitshift'id
+##### _Bitshift_'id
 
 **SHL a, b** - väärtuse a bitid lükatakse väärtuse b võrra vasakule.
 
 **SHR a, b** - väärtuse a bitid lükatakse väärtuse b võrra paremale.
 
-#### Riistvarakäsud
+##### Riistvarakäsud
 
 **SD** - shut down. Lõpetab protsessori töö.
 
-#### Label'id
+##### _Label_'id
 
 <i>Nb, labelid eksisteerivad ainult assemblerkeeles. Kompileerimise ajal asendatakse kõik labelid arvudega ning cpu ei tea labelite kohta midagi.</i>
 
