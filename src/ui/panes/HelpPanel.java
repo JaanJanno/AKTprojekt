@@ -20,7 +20,11 @@ public class HelpPanel extends JPanel {
 		// Load help
 		String text = "nothing here. could not find " + path;
 		try {
-			text = TextReader.helpTextLoader(path);
+			if (path=="about.html") {
+				text = aboutHelper(path);
+			}
+			else 
+				text = TextReader.helpTextLoader(path);
 		} catch (IOException e) {
 		}
 
@@ -34,6 +38,15 @@ public class HelpPanel extends JPanel {
 		txtpnlesannelesanne.setText(text);
 		scrollPane.setViewportView(txtpnlesannelesanne);
 
+	}
+	
+	private String aboutHelper(String path) throws IOException {
+		String text = TextReader.helpTextLoader(path);
+		String filename=this.getClass().getClassLoader().getResource("logo.png").toString();
+		String imageTag="<img src=\""+filename+"\"/>";
+		text += imageTag;
+//		text += "        </div></body></html>";
+		return text;
 	}
 
 }

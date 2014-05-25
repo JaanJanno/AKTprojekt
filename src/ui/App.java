@@ -26,6 +26,7 @@ public class App {
 	private SimpleModePanel simpleModePanel;
 	private HelpPanel helpPanel;
 	private HelpPanel instructionPanel;
+	private HelpPanel aboutPanel;
 	private ASMController asmController;
 	private JFileChooser chooser;
 
@@ -71,6 +72,12 @@ public class App {
 				getInstructionPanel();
 			}
 		});
+		executorService.execute(new Runnable() {
+			@Override
+			public void run() {
+				getHelpPanel();
+			}
+		});
 		executorService.shutdown();
 
 	}
@@ -80,7 +87,7 @@ public class App {
 	 */
 	private void initialize() {
 		frmProjekt = new JFrame();
-		frmProjekt.setTitle("Projekt");
+		frmProjekt.setTitle("SimplASM simulator");
 		frmProjekt.setBounds(150, 150, 768, 480);
 		frmProjekt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProjekt.setContentPane(getMenuPanel());
@@ -169,6 +176,17 @@ public class App {
 		});
 		mnHelp.add(mntmInstructions);
 		mnHelp.add(mntmHelp);
+		
+		JSeparator separator_2 = new JSeparator();
+		mnHelp.add(separator_2);
+		
+		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				goToAbout();
+			}
+		});
+		mnHelp.add(mntmAbout);
 
 		chooser = new JFileChooser();
 	}
@@ -185,16 +203,22 @@ public class App {
 		return simpleModePanel;
 	}
 
-	public HelpPanel getHelpPanel() {
+	private HelpPanel getHelpPanel() {
 		if (helpPanel == null)
 			helpPanel = new HelpPanel("help.html");
 		return helpPanel;
 	}
 
-	public HelpPanel getInstructionPanel() {
+	private HelpPanel getInstructionPanel() {
 		if (instructionPanel == null)
 			instructionPanel = new HelpPanel("instruction.html");
 		return instructionPanel;
+	}
+	
+	private HelpPanel getAboutPanel() {
+		if (aboutPanel == null)
+			aboutPanel = new HelpPanel("about.html");
+		return aboutPanel;
 	}
 
 	public JFrame getFrmProjekt() {
@@ -255,6 +279,11 @@ public class App {
 	public void goToMenu() {
 		frmProjekt.setContentPane(getMenuPanel());
 		frmProjekt.revalidate();
+	}
+	
+	public void goToAbout() {
+		frmProjekt.setContentPane(getAboutPanel());
+		frmProjekt.revalidate();		
 	}
 
 }
