@@ -4,6 +4,10 @@ Koostajad: Jaan Janno, Tõnis Kasekamp, Juhan-Rasmus Risti
 
 SimplASM on projekt, mis hõlmab endas assemblerkeelt ja virtuaalmasinat, mille peal saab jooksutada selles keeles loodud programme. Projekti eesmärgiks on tutvustada assemblerkeele tööpõhimõtet ja protseduure selle huvilistele.
 
+#### Käivitamine
+
+Programmi main meetod asub klassis main.Intro
+
 #### Toetatud väärtused
 
 **123** - arvuliteraal.
