@@ -57,7 +57,6 @@ public class RegisterPanel extends JPanel {
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 1;
 		add(register1, gbc_textField);
-		register1.setEnabled(false);
 		register1.setColumns(10);
 
 		JLabel lblRegister_1 = new JLabel("Register B");
@@ -74,8 +73,6 @@ public class RegisterPanel extends JPanel {
 		gbc_textField_1.gridx = 1;
 		gbc_textField_1.gridy = 2;
 		add(register2, gbc_textField_1);
-		register2.setEnabled(false);
-		register2.setEditable(false);
 		register2.setColumns(10);
 
 		JLabel lblRegister_2 = new JLabel("Register C");
@@ -92,8 +89,6 @@ public class RegisterPanel extends JPanel {
 		gbc_textField_2.gridx = 1;
 		gbc_textField_2.gridy = 3;
 		add(register3, gbc_textField_2);
-		register3.setEnabled(false);
-		register3.setEditable(false);
 		register3.setColumns(10);
 
 		JLabel lblRegister_3 = new JLabel("Register X");
@@ -110,8 +105,6 @@ public class RegisterPanel extends JPanel {
 		gbc_textField_3.gridx = 1;
 		gbc_textField_3.gridy = 4;
 		add(register4, gbc_textField_3);
-		register4.setEnabled(false);
-		register4.setEditable(false);
 		register4.setColumns(10);
 
 		JLabel lblRegister_4 = new JLabel("Register Y");
@@ -128,8 +121,6 @@ public class RegisterPanel extends JPanel {
 		gbc_textField_4.gridx = 1;
 		gbc_textField_4.gridy = 5;
 		add(register5, gbc_textField_4);
-		register5.setEnabled(false);
-		register5.setEditable(false);
 		register5.setColumns(10);
 
 		JLabel lblRegister_5 = new JLabel("Register Z");
@@ -145,8 +136,6 @@ public class RegisterPanel extends JPanel {
 		gbc_textField_5.gridx = 1;
 		gbc_textField_5.gridy = 6;
 		add(register6, gbc_textField_5);
-		register6.setEnabled(false);
-		register6.setEditable(false);
 		register6.setColumns(10);
 	}
 

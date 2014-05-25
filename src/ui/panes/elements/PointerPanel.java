@@ -33,7 +33,6 @@ public class PointerPanel extends JPanel {
 
 		stackPointer = new JTextField();
 		stackPointer.setMinimumSize(new Dimension(50, 20));
-		stackPointer.setEnabled(false);
 		stackPointer.setColumns(10);
 		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
 		gbc_textField_6.insets = new Insets(0, 0, 5, 0);
@@ -50,8 +49,6 @@ public class PointerPanel extends JPanel {
 
 		programCounter = new JTextField();
 		programCounter.setMinimumSize(new Dimension(50, 20));
-		programCounter.setEnabled(false);
-		programCounter.setEditable(false);
 		programCounter.setColumns(10);
 		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
 		gbc_textField_7.gridx = 1;

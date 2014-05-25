@@ -63,6 +63,7 @@ public class ASMControllerImpl implements ASMController {
 			processedCommands.add(cpu.getCurrentOpString());
 			Intro.window.update();
 		}
+		Intro.window.setMessage("All commands processed");
 
 	}
 
@@ -137,6 +138,8 @@ public class ASMControllerImpl implements ASMController {
 		cpu.callStep();
 		if (cpu.isPoweredOn())
 			processedCommands.add(cpu.getCurrentOpString());
+		else
+			Intro.window.setMessage("All commands processed");
 		Intro.window.update();
 	}
 
